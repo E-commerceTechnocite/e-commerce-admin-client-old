@@ -1,0 +1,4 @@
+front:
+    - '.*'
+critical:
+    - '(critical|urgent)'
