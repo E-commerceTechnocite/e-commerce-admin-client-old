@@ -25,5 +25,10 @@ npm run test:unit
 npm run test:e2e
 ```
 
+### Run json-server
+```
+npx json-server data/db.json -m ./node_modules/json-server-auth
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
