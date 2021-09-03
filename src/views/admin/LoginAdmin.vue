@@ -2,10 +2,10 @@
     <div class="login-admin">
         <div>
             <h1>LOGO</h1>
-            <h2>SIgn in to WNDR</h2>
+            <h2>Sign in to WNDR</h2>
             {{email}}
             {{password}}
-            {{token}}
+            {{$store.state.auth.user.accessToken}}
         </div>
         <div>
             <form @submit.prevent="handleSubmit">
@@ -23,6 +23,7 @@
                 </div>
                     <input type="submit" value="login" class="action">
             </form>
+            <button @click="showToken">show token</button>
         </div>
         
     </div>
@@ -30,34 +31,55 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import { watch } from '@vue/runtime-core'
+import {useStore} from 'vuex'
+
 export default {
     setup() {
-        const token = ref('')
+        const store = useStore()
+        const object = ref(store.state.auth.user)
         const email = ref('')
         const password = ref('')
-        
-        const handleSubmit = () => {
-            // if (email.length & password.length) {
-                const requestOptions = {
+
+        /* const object = ref({})
+        const token = ref(object.value.accessToken)
+        const email = ref('')
+        const password = ref('') */
+
+        /* const getUserToken = async () => {
+            console.log('coucou')
+            const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email, password: password })
+                body: JSON.stringify({ email: email.value, password: password.value })
+            }
+            try {
+                const response = await fetch("http://localhost:3000/users", requestOptions) 
+                if (!response.ok) {
+                    return console.log('No response from user')
                 }
-                fetch("http://localhost:3000/users", requestOptions)
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(err => console.log(err))
-            // }         
+                const data = await response.json()
+                return object.value = data
+            } catch (err) {
+                return err
+            }
+        } */ 
+        
+        const handleSubmit = () => {
+            getUserToken()   
+        }
+
+        const showToken = () => {
+            console.log(object.value.accessToken)           
         }
 
         // console.log(token) 
         
         return {
-            token, 
-            email, 
+            object,
+            email,
             password, 
-            handleSubmit
+            handleSubmit,
+            showToken
         }
     }
 
