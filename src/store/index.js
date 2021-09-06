@@ -6,9 +6,9 @@ import auth from './modules/auth'
     title:"mytitle"
   },
   getters: {
-    myTitle: () => {
-      return 'this is a title'
-    }
+    /* isLoggedIn: () => {
+     router.push('/')
+    } */
   },
   modules: {
     auth

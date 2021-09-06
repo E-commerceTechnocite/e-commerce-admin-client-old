@@ -3,9 +3,6 @@
         <div>
             <h1>LOGO</h1>
             <h2>Sign in to WNDR</h2>
-            <!-- {{email}}
-            {{password}}
-            {{token}} -->
         </div>
         <div>
             <form @submit.prevent="handleSubmit">
@@ -23,7 +20,6 @@
                 </div>
                     <input type="submit" value="login" class="action">
             </form>
-            <!-- <button @click="showToken">show token</button> -->
         </div>
         
     </div>
@@ -32,7 +28,7 @@
 <script>
 import { ref } from '@vue/reactivity'
 import {computed} from 'vue'
-import {mapActions, useStore} from 'vuex'
+import {useStore} from 'vuex'
 
 export default {
     
@@ -43,9 +39,8 @@ export default {
         const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
         const handleSubmit = async () => {
             await store.dispatch('auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
-            await store.dispatch('auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: '/dashboard'} )
+            await store.dispatch('auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'Dashboard'} )
         }
-        // const showToken = () => console.log(token.value)
         return {
             email,
             password,

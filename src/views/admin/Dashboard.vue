@@ -1,28 +1,25 @@
 <template>
 dashboard page
-  <div v-if="isLoggedIn">
-      You are logged in
+  <div v-if="$store.getters['auth/AUTH_IS_LOGGED_IN']">
+      You are logged in 
   </div>
   <div v-else>
-      You are not allowed
+      Error 404
   </div>
 </template>
 
 <script>
-import {computed} from 'vue'
+import {useStore} from 'vuex'
 
 export default {
-    /* setup() {
-        const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
-        const sessionToken = sessionStorage(getItem('token'))
-        const isLoggedIn = () => {
-            token === sessionToken ? true : false
-        }
+    setup() {
+        const store = useStore()
+
         return {
+            store,
             token,
-            isLoggedIn
         }
-    } */
+    }
 }
 </script>
 

@@ -1,3 +1,9 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "ji.pe.7@hotmail.com",
+      "password": "$2a$10$YrgQ8FPKk9j0zL8dEOLHCefAZvTx.IOpohhyUU63UvZjR0AgozUey",
+      "id": 1
+    }
+  ]
 }
