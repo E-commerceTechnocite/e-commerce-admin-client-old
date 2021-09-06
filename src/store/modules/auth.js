@@ -1,37 +1,41 @@
 export default ({
+    namespaced: true,
     state: {
-        user: {accessToken: "je suis l'access token", user: "je suis un user"},
-        email: '',
-        password: '',
+        user: {},
+        storage: ''
     },
     getters: {
-        USER_TOKEN: ({state}) => {
+        AUTH_USER_TOKEN: (state) => {
             return state.user.accessToken
         }
     },
     mutations: {
-        SET_USER: ({state}, data) => {
-            return state.objectUser = data
+        AUTH_SET_USER: (state, {userData}) => {
+            state.user = userData
         }
     },
     actions: {
-        FETCH_USER_TOKEN: async ({commit}, email, password) => {
+        AUTH_FETCH_USER_TOKEN: async ({commit}, email) => {
             console.log('coucou')
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email.value, password: password.value })
-            }
+                body: JSON.stringify({ email: email.email, password: email.password})
+            } 
             try {
                 const response = await fetch("http://localhost:3000/users", requestOptions) 
                 if (!response.ok) {
                     return console.log('No response from user')
-                }
+                } 
                 const data = await response.json()
-                return commit('USER_OBJECT', data)
+                commit('AUTH_SET_USER', {userData: data})
             } catch (err) {
                 return err
             }
+        },
+        AUTH_STORE_USER_TOKEN: ({}, data) => {
+            sessionStorage.setItem('token', data.token)
+            window.location.href = data.uri
         }
     }
 })

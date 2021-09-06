@@ -1,24 +1,3 @@
 {
-  "users": [
-    {
-      "email": "ji.pe.7@hotmail.com",
-      "password": "$2a$10$Bu/5DeMMySvH/C3wBqt1bOMNj5ajBm6ORIS/ewZFM2HJtMmE1gZOi",
-      "id": 1
-    },
-    {
-      "email": "ji.pe.8@hotmail.com",
-      "password": "$2a$10$Q54J4/.K6Be2/CypHPEcueH.bCwHOb8N/wUlJAfkf69a61VVRFTmy",
-      "id": 2
-    },
-    {
-      "email": "ji.pe.9@hotmail.com",
-      "password": "$2a$10$FBW5Gx/XO0ckBfY9DBETDuR5lWYJRIh4r.ukrSliy917N5rdJflwS",
-      "id": 3
-    },
-    {
-      "email": "ji.pe.10@hotmail.com",
-      "password": "$2a$10$1DwEo5UTHn9IHAV.6wEIPe1TaYmSy0DreMAMAgqelN2JRZ6SdK4T6",
-      "id": 4
-    }
-  ]
+  "users": []
 }

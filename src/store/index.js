@@ -1,13 +1,14 @@
 import { createStore } from 'vuex'
-import auth from './auth'
+import auth from './modules/auth'
 
  const store = createStore({
   state: {
     title:"mytitle"
   },
-  mutations: {
-  },
-  actions: {
+  getters: {
+    myTitle: () => {
+      return 'this is a title'
+    }
   },
   modules: {
     auth

@@ -3,9 +3,9 @@
         <div>
             <h1>LOGO</h1>
             <h2>Sign in to WNDR</h2>
-            {{email}}
+            <!-- {{email}}
             {{password}}
-            {{$store.state.auth.user.accessToken}}
+            {{token}} -->
         </div>
         <div>
             <form @submit.prevent="handleSubmit">
@@ -23,7 +23,7 @@
                 </div>
                     <input type="submit" value="login" class="action">
             </form>
-            <button @click="showToken">show token</button>
+            <!-- <button @click="showToken">show token</button> -->
         </div>
         
     </div>
@@ -31,58 +31,28 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import {useStore} from 'vuex'
+import {computed} from 'vue'
+import {mapActions, useStore} from 'vuex'
 
 export default {
+    
     setup() {
         const store = useStore()
-        const object = ref(store.state.auth.user)
         const email = ref('')
         const password = ref('')
-
-        /* const object = ref({})
-        const token = ref(object.value.accessToken)
-        const email = ref('')
-        const password = ref('') */
-
-        /* const getUserToken = async () => {
-            console.log('coucou')
-            const requestOptions = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email.value, password: password.value })
-            }
-            try {
-                const response = await fetch("http://localhost:3000/users", requestOptions) 
-                if (!response.ok) {
-                    return console.log('No response from user')
-                }
-                const data = await response.json()
-                return object.value = data
-            } catch (err) {
-                return err
-            }
-        } */ 
-        
-        const handleSubmit = () => {
-            getUserToken()   
+        const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
+        const handleSubmit = async () => {
+            await store.dispatch('auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
+            await store.dispatch('auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: '/dashboard'} )
         }
-
-        const showToken = () => {
-            console.log(object.value.accessToken)           
-        }
-
-        // console.log(token) 
-        
+        // const showToken = () => console.log(token.value)
         return {
-            object,
             email,
-            password, 
-            handleSubmit,
-            showToken
+            password,
+            token,
+            handleSubmit
         }
     }
-
 }
 </script>
 
