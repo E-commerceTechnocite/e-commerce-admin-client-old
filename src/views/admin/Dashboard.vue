@@ -1,13 +1,42 @@
 <template>
-    <div class="wrapper">
-        <!--Top menu -->
-        <div class="sidebar">
-           <!--profile image & text-->
-            <!--menu item-->
-        </div>
-
-    </div>
+  <div v-if="isLoggedIn" class="navbar">
+      <!--You are logged in-->
+      <NavigationBar  />
+      <SideBar />
+  </div>
+  <div v-else>
+     <NavigationBar  />
+     <SideBar />
+  </div>
 </template>
+
+<script>
+import {computed} from 'vue'
+import NavigationBar from '@/components/NavigationBar.vue'
+import SideBar from '@/components/SideBar.vue'
+
+export default {
+    /* setup() {
+        const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
+        const sessionToken = sessionStorage(getItem('token'))
+        const isLoggedIn = () => {
+            token === sessionToken ? true : false
+        }
+        return {
+            token,
+            isLoggedIn
+        }
+    } */
+    name: 'NavBar',
+    components: {
+        NavigationBar,
+        SideBar
+    },
+    setup() {
+        //const components = NavigationBar
+    }
+}
+</script>
 
 <style>
    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
