@@ -1,6 +1,6 @@
 <template>
 dashboard page
-  <div v-if="$store.getters['auth/AUTH_IS_LOGGED_IN']">
+  <div v-if="$store.getters['auth/AUTH_IS_AUTHENTICATED']">
       You are logged in 
   </div>
   <div v-else>
@@ -9,15 +9,18 @@ dashboard page
 </template>
 
 <script>
+import { onMounted, ref } from '@vue/runtime-core'
+import {computed} from 'vue'
 import {useStore} from 'vuex'
 
 export default {
     setup() {
         const store = useStore()
-
+        onMounted(async () => {
+            await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') 
+        })
         return {
-            store,
-            token,
+            store
         }
     }
 }

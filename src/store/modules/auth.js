@@ -3,25 +3,37 @@ import router from "../../router"
 export default ({
     namespaced: true,
     state: {
-        user: null,
-        storage: ''
+        token: null,
+        user: undefined,
+        authenticate: false
     },
     getters: {
         AUTH_USER_TOKEN: (state) => {
-            return state.user
+            return state.user.accessToken
         },
 
-        AUTH_IS_LOGGED_IN: () => {
-            return sessionStorage.getItem('token') ? true : false
-          }
+        AUTH_USER: (state) => {
+            return state.user.user
+        },
+
+        AUTH_IS_AUTHENTICATED: (state) => {
+            return state.authenticate
+        }
     },
     mutations: {
         AUTH_SET_USER: (state, {userData}) => {
-            state.user = userData.accessToken
+            state.user = userData
+        },
+
+        AUTH_AUTHENTICATION: (state) => {
+            state.authenticate = true
+        },
+
+        AUTH_DESTROY: (state) => {
+            state.authenticate = false
         }
     },
     actions: {
-
         // fetch user token when login and set the token in auth module
         // can be used to register user
         AUTH_FETCH_USER_TOKEN: async ({commit}, email) => {
@@ -42,30 +54,24 @@ export default ({
             }
         },
 
+        // Check the user token validity on the page by server request with token bearer 
+        AUTH_CHECK_USER_VALIDITY: async ({commit, getters}) => {
+            let userId
+            let sessionId = sessionStorage.getItem('id')
+            if (!sessionId) userId = sessionStorage.setItem('id', getters['auth/AUTH_USER'])
+            userId = sessionId
+            let sessionToken = JSON.parse(sessionStorage.getItem('token'))
+            const response = await fetch ('http://localhost:3000/660/users/' + userId, {
+                headers: {'Authorization': `Bearer ${sessionToken}`}
+            })
+            !response.ok ? commit('AUTH_DESTROY') : commit('AUTH_AUTHENTICATION')
+        },
+
         // Set token in session storage and redirect to desired link
         // data object
         AUTH_STORE_USER_TOKEN({}, data) {
             sessionStorage.setItem('token', JSON.stringify(data.token))
             if (data.token) router.push({name: data.uri})
-        },
-
-        AUTH_CHECK_TOKEN: async ({}, route) => {
-            let sessionToken = JSON.parse(sessionStorage.getItem('token'))
-            let requestOptions = {
-                method: "GET",
-                headers: {'Authentication': `Bearer ${sessionToken}`}
-            }
-            //////////////////////////
-            try {
-                let response = await fetch("http://localhost:3000/users", requestOptions)
-                if (!response.ok) {
-                    return console.log('oops')
-                } 
-                router.push({name: route})
-                //////////////////////
-            } catch (err) {
-                return err
-            }
         }
     }
 })

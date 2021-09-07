@@ -3,7 +3,16 @@
     {
       "email": "ji.pe.7@hotmail.com",
       "password": "$2a$10$YrgQ8FPKk9j0zL8dEOLHCefAZvTx.IOpohhyUU63UvZjR0AgozUey",
-      "id": 1
+      "role": 1,
+      "id": 1,
+      "authFields": ["role"] 
+    },
+    {
+      "email": "ji.pe.8@hotmail.com",
+      "password": "$2a$10$YrgQ8FPKk9j0zL8dEOLHCefAZvTx.IOpohhyUU63UvZjR0AgozUey",
+      "role": 2,
+      "id": 2,
+      "authFields": ["role"] 
     }
   ]
 }
