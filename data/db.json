@@ -1,18 +1,22 @@
 {
   "users": [
     {
-      "email": "ji.pe.7@hotmail.com",
-      "password": "$2a$10$YrgQ8FPKk9j0zL8dEOLHCefAZvTx.IOpohhyUU63UvZjR0AgozUey",
-      "role": 1,
-      "id": 1,
-      "authFields": ["role"] 
+      "email": "user@admin.com",
+      "password": "$2a$10$sbrXjZag93OiQstTgQXnIO287g2t2gDl5wlUYdEnCR4LX3iPAvwrm",
+      "id": 3,
+      "role": 2,
+      "authFields": [
+        "role"
+      ]
     },
     {
-      "email": "ji.pe.8@hotmail.com",
-      "password": "$2a$10$YrgQ8FPKk9j0zL8dEOLHCefAZvTx.IOpohhyUU63UvZjR0AgozUey",
-      "role": 2,
-      "id": 2,
-      "authFields": ["role"] 
+      "email": "user@user.com",
+      "password": "$2a$10$IJkOiu5qHW48YFKSFeeRKOMz47biObz9gCXUKZDC7.mxEp4nVkuue",
+      "id": 4,
+      "role": 1,
+      "authFields": [
+        "role"
+      ]
     }
   ]
 }

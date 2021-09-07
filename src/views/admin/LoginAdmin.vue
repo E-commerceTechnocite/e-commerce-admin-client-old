@@ -27,8 +27,8 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import {computed} from 'vue'
-import {useStore} from 'vuex'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
     
@@ -38,8 +38,8 @@ export default {
         const password = ref('')
         const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
         const handleSubmit = async () => {
-            await store.dispatch('auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
-            await store.dispatch('auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'Dashboard'} )
+            await store.dispatch( 'auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
+            await store.dispatch( 'auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'Dashboard'} )
         }
         return {
             email,
@@ -108,12 +108,10 @@ export default {
         margin: 20px 0 50px 0
     }
     .login-admin [type=checkbox]{
-        
         margin: 1px 15px 0 0;
     }
     .login-admin [type=checkbox] + label {
         position: relative;
-        
     }
     .login-admin [type=checkbox] + label::before {
         content: '';
@@ -127,5 +125,5 @@ export default {
     }
     .login-admin [type=checkbox]:focus + label::before {
         background: 0;
-    }
+     }
 </style>

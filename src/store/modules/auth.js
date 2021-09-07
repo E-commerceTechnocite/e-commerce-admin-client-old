@@ -44,9 +44,7 @@ export default ({
             } 
             try {
                 let response = await fetch("http://localhost:3000/login", requestOptions) 
-                if (!response.ok) {
-                    return console.log('wrong id')
-                } 
+                if (!response.ok) router.push({name: 'LoginAdmin'})
                 const data = await response.json()
                 if (data !== null) commit('AUTH_SET_USER', {userData: data})
             } catch (err) {
@@ -55,16 +53,18 @@ export default ({
         },
 
         // Check the user token validity on the page by server request with token bearer 
-        AUTH_CHECK_USER_VALIDITY: async ({commit, getters}) => {
-            let userId
-            let sessionId = sessionStorage.getItem('id')
-            if (!sessionId) userId = sessionStorage.setItem('id', getters['auth/AUTH_USER'])
-            userId = sessionId
-            let sessionToken = JSON.parse(sessionStorage.getItem('token'))
-            const response = await fetch ('http://localhost:3000/660/users/' + userId, {
+        AUTH_CHECK_USER_VALIDITY: async ({commit}) => {
+            if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') router.push({name: 'LoginAdmin'})
+                let sessionToken = JSON.parse(sessionStorage.getItem('token')) 
+            try {
+                let response = await fetch ('http://localhost:3000/660/users', {
                 headers: {'Authorization': `Bearer ${sessionToken}`}
             })
             !response.ok ? commit('AUTH_DESTROY') : commit('AUTH_AUTHENTICATION')
+            return response.ok
+            } catch (err) {
+                return err
+            }
         },
 
         // Set token in session storage and redirect to desired link
