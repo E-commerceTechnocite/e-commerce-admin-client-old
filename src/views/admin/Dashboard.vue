@@ -4,6 +4,7 @@
             <NavigationBar />
             <div>
                 <SideBar />
+                <span>you are logged in</span>
             </div>
         </div>
         <div v-else>
@@ -35,9 +36,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .dashboard {
     display: flex;
     flex-direction: column;
+    position: fixed;
+}
+.dashboard > div {
+    display: flex;
 }
 </style>
