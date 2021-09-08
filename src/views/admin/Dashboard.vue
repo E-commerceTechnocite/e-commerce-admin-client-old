@@ -5,8 +5,11 @@
       <SideBar />
   </div>
   <div v-else>
-     <NavigationBar  />
-     <SideBar />
+     <ProductInformation />
+     <br>
+     <ProductInformation />
+     <br>
+     <ProductInformation />
   </div>
 </template>
 
@@ -14,6 +17,7 @@
 import {computed} from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
+import ProductInformation from '@/components/ProductInformation.vue'
 
 export default {
     /* setup() {
@@ -30,7 +34,8 @@ export default {
     name: 'NavBar',
     components: {
         NavigationBar,
-        SideBar
+        SideBar,
+        ProductInformation
     },
     setup() {
         //const components = NavigationBar

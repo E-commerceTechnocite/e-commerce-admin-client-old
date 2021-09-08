@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-link :to="{name: 'LoginAdmin'}">login admin</router-link>
+    <router-link :to="{name: 'Dashboard'}">login admin</router-link>
   </div>
 </template>
 
