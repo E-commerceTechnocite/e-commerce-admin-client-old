@@ -1,15 +1,18 @@
 <template>
-    <span class="titleProduct">{{ titleProduct }}</span>
-    <a> - </a>
-    <span class="ref">{{ refr }}</span>
-    <a> - </a>
-    <span class="category">{{ category }}</span>
-    <a> - </a>
-    <span class="price">{{ price }}</span>
-    <a> - </a>
-    <span class="taxPrice">{{ taxPrice }}</span>
-    <button>EDIT</button>
-    <button>BIN</button>
+    <div class="product-information">
+        <span class="titleProduct">{{ titleProduct }}</span>
+        <a> - </a>
+        <span class="ref">{{ refr }}</span>
+        <a> - </a>
+        <span class="category">{{ category }}</span>
+        <a> - </a>
+        <span class="price">{{ price }}</span>
+        <a> - </a>
+        <span class="taxPrice">{{ taxPrice }}</span>
+        <button>EDIT</button>
+        <button>BIN</button>
+    </div>
+    
 </template>
 
 <script>
@@ -32,7 +35,7 @@ export default ({
 </script>
 
 <style>
-  span{ 
+.product-information span{ 
    border: 1px solid black; padding: 5px; 
 }
 </style>
