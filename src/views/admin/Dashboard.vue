@@ -4,7 +4,6 @@
             <NavigationBar />
             <div>
                 <SideBar />
-                <span>you are logged in</span>
             </div>
         </div>
         <div v-else>

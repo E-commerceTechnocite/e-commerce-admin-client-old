@@ -39,7 +39,7 @@ export default {
         const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
         const handleSubmit = async () => {
             await store.dispatch( 'auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
-            await store.dispatch( 'auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'Dashboard'} )
+            await store.dispatch( 'auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'DashboardHome'} )
         }
         return {
             email,
