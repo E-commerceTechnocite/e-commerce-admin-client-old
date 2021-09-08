@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "email": "user@admin.com",
+      "password": "$2a$10$sbrXjZag93OiQstTgQXnIO287g2t2gDl5wlUYdEnCR4LX3iPAvwrm",
+      "id": 3,
+      "role": 2,
+      "authFields": [
+        "role"
+      ]
+    },
+    {
+      "email": "user@user.com",
+      "password": "$2a$10$IJkOiu5qHW48YFKSFeeRKOMz47biObz9gCXUKZDC7.mxEp4nVkuue",
+      "id": 4,
+      "role": 1,
+      "authFields": [
+        "role"
+      ]
+    }
+  ]
+}

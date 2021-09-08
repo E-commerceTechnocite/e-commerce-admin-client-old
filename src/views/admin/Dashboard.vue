@@ -1,36 +1,31 @@
 <template>
-  <div v-if="isLoggedIn" class="navbar">
-      <!--You are logged in-->
-      <NavigationBar  />
-      <SideBar />
-  </div>
-  <div v-else>
-     <ProductInformation />
-     <br>
-     <ProductInformation />
-     <br>
-     <ProductInformation />
-  </div>
+    dashboard page
+    <div v-if="$store.getters['auth/AUTH_IS_AUTHENTICATED']">
+        <div v-if="true">
+            You are logged in 
+            <NavigationBar  />
+            <SideBar />
+            <ProductInformation />
+            <ProductInformation />
+            <ProductInformation />
+        </div>
+        <div v-else>
+            loading
+        </div>
+    </div>
+    <div v-else>
+        Error 404
+    </div>
 </template>
 
 <script>
-import {computed} from 'vue'
+import { onMounted } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
 import ProductInformation from '@/components/ProductInformation.vue'
 
 export default {
-    /* setup() {
-        const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
-        const sessionToken = sessionStorage(getItem('token'))
-        const isLoggedIn = () => {
-            token === sessionToken ? true : false
-        }
-        return {
-            token,
-            isLoggedIn
-        }
-    } */
     name: 'NavBar',
     components: {
         NavigationBar,
@@ -38,35 +33,12 @@ export default {
         ProductInformation
     },
     setup() {
-        //const components = NavigationBar
+        const store = useStore()
+        onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
+        return { store }
     }
 }
 </script>
 
 <style>
-   @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-*{
-    list-style: none;
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-}
-
-body{
-    background: #f5f6fa;
-}
-
-.wrapper .sidebar{
-    background: rgb(5, 68, 104);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 225px;
-    height: 100%;
-    padding: 20px 0;
-    transition: all 0.5s ease;
-}
 </style>
