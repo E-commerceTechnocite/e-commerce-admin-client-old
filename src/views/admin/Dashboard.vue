@@ -4,6 +4,7 @@
             <NavigationBar />
             <div>
                 <SideBar />
+                <router-view/>
             </div>
         </div>
         <div v-else>
