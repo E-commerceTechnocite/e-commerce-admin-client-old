@@ -1,38 +1,54 @@
 <template>
-    <span class="titleProduct">{{ titleProduct }}</span>
-    <a> - </a>
-    <span class="ref">{{ refr }}</span>
-    <a> - </a>
-    <span class="category">{{ category }}</span>
-    <a> - </a>
-    <span class="price">{{ price }}</span>
-    <a> - </a>
-    <span class="taxPrice">{{ taxPrice }}</span>
-    <button>EDIT</button>
-    <button>BIN</button>
+    <ul>
+     <li>
+      <div class="productListing" v-for="product in productData" :key="product">
+        <span class="titleProduct" >{{ product.titleProduct }}</span>
+        <a> - </a>
+        <span class="ref">{{ product.refr }}</span>
+        <a> - </a>
+        <span class="category">{{ product.category }}</span>
+        <a> - </a>
+        <span class="price">{{ product.price }}</span>
+        <a> - </a>
+        <span class="taxPrice">{{ product.taxPrice }}</span>
+        <button>EDIT</button>
+        <button>BIN</button>
+      </div>
+     </li>
+    </ul>
 </template>
 
 <script>
+import { ref } from "@vue/reactivity"
+
 export default ({
     setup() {
-        let titleProduct = "title"
-        let refr = "ref"
-        let category = "category"
-        let price = 150
-        let taxPrice = "21%"
+        const productData = ref([])
+        const fetchProducts = async() => {
+            try {
+                let response = await fetch ('http://localhost:3000/products', {
+                headers: {"Content-Type": "application/json"}
+            }) 
+            const data = await response.json()
+            productData.value = data
+            } catch (err) {
+                return err
+            }
+        }
+        fetchProducts()
+        
         return {
-            titleProduct,
-            refr,
-            category,
-            price,
-            taxPrice
+            productData
         }
     }
 })
+
+
 </script>
 
 <style>
-  span{ 
-   border: 1px solid black; padding: 5px; 
+  .productListing span{ 
+   border: 1px solid black; 
 }
+
 </style>

@@ -18,5 +18,29 @@
         "role"
       ]
     }
+  ],
+  
+  "products": [
+    {
+      "titleProduct": "titre 1",
+      "refr": "ref1",
+      "category": "cat1",
+      "price": "150€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "titre 2",
+      "refr": "ref2",
+      "category": "cat2",
+      "price": "100€",
+      "taxPrice": "6%"
+    },
+    {
+      "titleProduct": "titre 3",
+      "refr": "ref3",
+      "category": "cat3",
+      "price": "10€",
+      "taxPrice": "12%"
+    }
   ]
 }

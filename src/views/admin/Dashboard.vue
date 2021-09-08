@@ -4,7 +4,9 @@
             <NavigationBar />
             <div>
                 <SideBar />
+                <ProductInformation />
             </div>
+            
         </div>
         <div v-else>
             loading
@@ -20,12 +22,14 @@ import { onMounted } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
+import ProductInformation from '@/components/ProductInformation.vue'
 
 export default {
     name: 'NavBar',
     components: {
         NavigationBar,
-        SideBar
+        SideBar,
+        ProductInformation
     },
     setup() {
         const store = useStore()
@@ -39,5 +43,8 @@ export default {
 .dashboard {
     display: flex;
     flex-direction: column;
+}
+.dashboard>div {
+    display: flex;
 }
 </style>
