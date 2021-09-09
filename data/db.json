@@ -22,21 +22,21 @@
   
   "products": [
     {
-      "titleProduct": "titre 1",
+      "titleProduct": "Ordinateur",
       "refr": "ref1",
       "category": "cat1",
       "price": "150€",
       "taxPrice": "21%"
     },
     {
-      "titleProduct": "titre 2",
+      "titleProduct": "Smartphone",
       "refr": "ref2",
       "category": "cat2",
       "price": "100€",
       "taxPrice": "6%"
     },
     {
-      "titleProduct": "titre 3",
+      "titleProduct": "Stylet",
       "refr": "ref3",
       "category": "cat3",
       "price": "10€",

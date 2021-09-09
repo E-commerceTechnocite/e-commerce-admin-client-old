@@ -1,4 +1,3 @@
-
 export default ({
     namespaced: true,
     state: {
@@ -17,7 +16,7 @@ export default ({
     actions: {
         FETCH_PRODUCTS: async({commit}) => {
             try {
-                let response = await fetch ('http://localhost:3000/products', {
+                let response = await fetch ('http://localhost:3001/products', {
                 headers: {"Content-Type": "application/json"}
             }) 
             const jsonData = await response.json()

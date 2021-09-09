@@ -43,7 +43,7 @@ export default ({
                 body: JSON.stringify({ email: email.email, password: email.password})
             } 
             try {
-                let response = await fetch("http://localhost:3000/login", requestOptions) 
+                let response = await fetch("http://localhost:3001/login", requestOptions) 
                 if (!response.ok) router.push({name: 'LoginAdmin'})
                 const data = await response.json()
                 if (data !== null) commit('AUTH_SET_USER', {userData: data})
@@ -57,7 +57,7 @@ export default ({
             if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') router.push({name: 'LoginAdmin'})
                 let sessionToken = JSON.parse(sessionStorage.getItem('token')) 
             try {
-                let response = await fetch ('http://localhost:3000/660/users', {
+                let response = await fetch ('http://localhost:3001/660/users', {
                 headers: {'Authorization': `Bearer ${sessionToken}`}
             })
             !response.ok ? commit('AUTH_DESTROY') : commit('AUTH_AUTHENTICATION')

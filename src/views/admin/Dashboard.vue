@@ -4,7 +4,10 @@
             <NavigationBar />
             <div>
                 <SideBar />
-                <ProductInformation />
+                <div class="container">
+                    <ProductInformation />
+
+                </div>
             </div>
             
         </div>
@@ -46,5 +49,8 @@ export default {
 }
 .dashboard>div {
     display: flex;
+}
+.dashboard .container {
+    flex-grow: 1;
 }
 </style>
