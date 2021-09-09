@@ -1,7 +1,7 @@
 <template>
     <ul>
      <li>
-      <div class="productListing" v-for="product in productData" :key="product">
+      <div class="productListing" v-for="product in data/*productData*/" :key="product">
         <span class="titleProduct" >{{ product.titleProduct }}</span>
         <a> - </a>
         <span class="ref">{{ product.refr }}</span>
@@ -20,30 +20,19 @@
 
 <script>
 import { ref } from "@vue/reactivity"
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default ({
     setup() {
-        const productData = ref([])
-        const fetchProducts = async() => {
-            try {
-                let response = await fetch ('http://localhost:3000/products', {
-                headers: {"Content-Type": "application/json"}
-            }) 
-            const data = await response.json()
-            productData.value = data
-            } catch (err) {
-                return err
-            }
-        }
-        fetchProducts()
-        
+        const store = useStore()
+        store.dispatch('products/FETCH_PRODUCTS') 
+        const data = computed(() => store.getters['products/PRODUCTS_']) 
         return {
-            productData
-        }
+            data
+        }  
     }
 })
-
-
 </script>
 
 <style>

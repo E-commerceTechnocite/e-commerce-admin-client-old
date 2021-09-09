@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import auth from './modules/auth'
+import products from './modules/products'
 
  const store = createStore({
   state: {
@@ -7,7 +8,8 @@ import auth from './modules/auth'
   getters: {
   },
   modules: {
-    auth
+    auth,
+    products
   }
 })
 export default store

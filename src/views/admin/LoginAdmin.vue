@@ -20,8 +20,7 @@
                 </div>
                     <input type="submit" value="login" class="action">
             </form>
-        </div>
-        
+        </div>  
     </div>
 </template>
 

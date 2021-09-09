@@ -1,68 +1,30 @@
+
 export default ({
+    namespaced: true,
     state: {
-        titleProduct,
-        ref,
-        category,
-        price,
-        taxPrice
+        products : []
     },
     getters: {
-        PRODUCT_TITLE: (state) => {
-            return state.titleProduct
-        },
-
-        PRODUCT_REF: (state) => {
-            return state.ref
-        },
-
-        PRODUCT_CATEGORY: (state) => {
-            return state.category
-        },
-
-        PRODUCT_PRICE: (state) => {
-            return state.price
-        },
-
-        PRODUCT_TAXPRICE: (state) => {
-            return state.taxPrice
-        },
+        PRODUCTS_: (state) => {
+            return state.products
+        }
     },
     mutations: {
-        PRODUCT_SET_TITLE: (state, {tdata}) => {
-            state.titleProduct = data
-        },
-
-        PRODUCT_SET_REF: (state, {rdata}) => {
-            state.ref = data
-        },
-
-        PRODUCT_SET_CATEGORY: (state, {cdata}) => {
-            state.category = data
-        },
-
-        PRODUCT_SET_PRICE: (state, {pdata}) => {
-            state.price = data
-        },
-
-        PRODUCT_SET_TAXPRICE: (state, {txdata}) => {
-            state.taxPrice = data
+        PRODUCTS_SET: (state, {data}) => {
+            state.products = data
         }
     },
     actions: {
-        FETCH_PRODUCT_LIST: () => {
-            fetch(" http://localhost:3000/products")
-    .then(async response => {
-      const data = await response.json();
-      if (data !== null) commit('PRODUCT_SET_TITLE', {tdata: data})
-      // check for error response
-      if (!response.ok) {
-          console.log("error")   
-      }
-      
-    })
-    .catch(err => {
-      console.error("There was an error!", error);
-    });
+        FETCH_PRODUCTS: async({commit}) => {
+            try {
+                let response = await fetch ('http://localhost:3000/products', {
+                headers: {"Content-Type": "application/json"}
+            }) 
+            const jsonData = await response.json()
+            if (jsonData !== null) commit('PRODUCTS_SET', {data: jsonData})
+            } catch (err) {
+                return err
+            }
         }
     }
   })
