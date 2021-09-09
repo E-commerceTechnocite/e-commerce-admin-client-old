@@ -1,37 +1,50 @@
 <template>
+<div v-if="loaded">
     <div v-if="$store.getters['auth/AUTH_IS_AUTHENTICATED']">
-        <div v-if="true" class="dashboard">
+        <div class="dashboard">
             <NavigationBar />
             <div>
                 <SideBar />
                 <router-view/>
             </div>
         </div>
-        <div v-else>
-            loading
-        </div>
     </div>
     <div v-else>
         Error 404
     </div>
+</div>
+<div v-else>
+    <Loading />
+</div>
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
+import { onMounted, onUpdated, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import Loading from '../../components/Loading.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
 
 export default {
-    name: 'NavBar',
     components: {
         NavigationBar,
-        SideBar
+        SideBar,
+        Loading
     },
     setup() {
         const store = useStore()
-        onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        return { store }
+        const router = useRouter()
+        const loaded = ref(false)
+        const checkUser = async () => {
+                const response = await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY')
+                if (!response) router.push({name: 'LoginAdmin'})
+                if (!loaded.value) loaded.value = true 
+            
+        } 
+        onMounted(checkUser)
+        onUpdated(checkUser)
+        return { store, loaded }
     }
 }
 </script>

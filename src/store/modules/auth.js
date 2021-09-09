@@ -54,8 +54,8 @@ export default ({
 
         // Check the user token validity on the page by server request with token bearer 
         AUTH_CHECK_USER_VALIDITY: async ({commit}) => {
-            if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') router.push({name: 'LoginAdmin'})
-                let sessionToken = JSON.parse(sessionStorage.getItem('token')) 
+            if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') return 
+            let sessionToken = JSON.parse(sessionStorage.getItem('token')) 
             try {
                 let response = await fetch ('http://localhost:4000/660/users', {
                 headers: {'Authorization': `Bearer ${sessionToken}`}
@@ -72,6 +72,14 @@ export default ({
         AUTH_STORE_USER_TOKEN({}, data) {
             sessionStorage.setItem('token', JSON.stringify(data.token))
             if (data.token) router.push({name: data.uri})
+        },
+
+        // Logout the user
+        // pass true if admin
+        AUTH_LOGOUT: ({}, admin) => {
+            sessionStorage.removeItem('token')
+            if (admin) return router.push({name: 'LoginAdmin'})
+            return router.push({name: 'Home'})
         }
     }
 })

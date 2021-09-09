@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import NotFound from '../views/NotFound.vue'
 import Home from '../views/client/Home.vue'
 import LoginAdmin from '../views/admin/LoginAdmin.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
@@ -46,17 +47,26 @@ const routes = [
         component: Customers
       },
       {
-        path: 'products',
+        path: 'shipping',
         name: 'Shipping',
         component: Shipping
       },
     ]
   },
+  // Redirect any invalid path to 404 page
+  {
+    path: '/:catchall(.*)',
+    name: 'NotFound',
+    component: NotFound
+  }
+  
+  
+  /* ,
   {
     path: '/',
     name: 'Catalog',
     component: Dashboard
-  },
+  }, */
 ]
 
 const router = createRouter({

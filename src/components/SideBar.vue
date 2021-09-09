@@ -3,17 +3,17 @@
         <nav>
             <div>
                 <ul>
-                    <li class="sidebar-active"><router-link :to="{name: 'DashboardHome'}"><span><i class="fas fa-tachometer-alt "></i></span>Dashboard</router-link></li>
-                    <li><router-link :to="{name: 'Products'}"><span><i class="fas fa-folder-open"></i></span>Products</router-link></li>
-                    <li><router-link :to="{name: 'Billing'}"><span><i class="fas fa-file-invoice-dollar"></i></span>Billing</router-link></li>
-                    <li><router-link :to="{name: 'Customers'}"><span><i class="fas fa-user"></i></span>Customers</router-link></li>
-                    <li><router-link :to="{name: 'Shipping'}"><span><i class="fas fa-dolly"></i></span>Shipping</router-link></li>
+                    <li :class="{ 'sidebar-active': isRouteActive({name: 'DashboardHome'}) }" ><router-link :to="{name: 'DashboardHome'}"><span><i class="fas fa-tachometer-alt "></i></span>Dashboard</router-link></li>
+                    <li :class="{ 'sidebar-active': isRouteActive({name: 'Products'}) }"><router-link :to="{name: 'Products'}"><span><i class="fas fa-folder-open"></i></span>Products</router-link></li>
+                    <li :class="{ 'sidebar-active': isRouteActive({name: 'Billing'}) }"><router-link :to="{name: 'Billing'}"><span><i class="fas fa-file-invoice-dollar"></i></span>Billing</router-link></li>
+                    <li :class="{ 'sidebar-active': isRouteActive({name: 'Customers'}) }"><router-link :to="{name: 'Customers'}"><span><i class="fas fa-user"></i></span>Customers</router-link></li>
+                    <li :class="{ 'sidebar-active': isRouteActive({name: 'Shipping'}) }"><router-link :to="{name: 'Shipping'}"><span><i class="fas fa-dolly"></i></span>Shipping</router-link></li>
                 </ul> 
             </div>
             <div>
                 <span>ACCOUNT</span>
                 <ul>
-                    <li><router-link to=""><span><i class="fas fa-id-badge"></i></span>Profile</router-link></li>
+                    <li :class="{ 'sidebar-active': false }"><router-link to=""><span><i class="fas fa-id-badge"></i></span>Profile</router-link></li>
                     <li @click="logout"><router-link to="#"><span><i class="fas fa-sign-out-alt"></i></span>Sign out</router-link></li>
                 </ul> 
             </div>
@@ -22,17 +22,18 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
     setup() {
         const router = useRouter()
-        const logout = () => {
-            sessionStorage.removeItem('token')
-            router.push({name: 'LoginAdmin'})
-        }
+        const route = useRoute()
+        const store = useStore()
+        const logout = () => { store.dispatch('auth/AUTH_LOGOUT', true)}
+        const isRouteActive = (path) => { return router.resolve(path).fullPath === route.path }
         
-        return { logout }
+        return { logout, isRouteActive }
     },
 }
 </script>
