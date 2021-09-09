@@ -1,7 +1,7 @@
 <template>
   <div class="navigation-bar">
     <div class="logo">
-      <h1>LOGO</h1>
+      <router-link :to="{name: 'DashboardHome'}"><h1>LOGO</h1></router-link>
     </div>
       <div class="search-bar">
         <div>
@@ -10,19 +10,47 @@
         </div>
       </div>
       <div class="user-info">
-        <div class="user">
-          <span>John</span>
-          <span>Doe</span>
-          <i class="fas fa-sort-down"></i>
+        <div class="user" >
+          <div ref="dropMenu" v-show="userDropMenu">
+            <router-link to="#">Profile</router-link>
+            <router-link to="#" @click="logout">Logout</router-link>
+          </div>
+          <div  @click="handleClick">
+            <span>John</span>
+            <span>Doe</span>
+            <i class="fas fa-sort-down"></i>
+          </div>
         </div>
         <div class="user-img">
           <img src="" alt="">
         </div>
       </div>
-    
-    
   </div>
 </template>
+
+<script>
+import { ref } from '@vue/reactivity'
+import { useStore } from 'vuex'
+
+export default {
+  setup() {
+    const store = useStore()
+    const dropMenu = ref(null)
+    const userDropMenu = ref(false)
+    const logout = () => { store.dispatch('auth/AUTH_LOGOUT', true)}
+    const handleClick = () => {
+      userDropMenu.value = !userDropMenu.value
+    }
+    
+    return {
+      userDropMenu,
+      dropMenu,
+      handleClick,
+      logout
+    }
+  },
+}
+</script>
 
 <style>
   .navigation-bar {
@@ -70,6 +98,7 @@
  .navigation-bar .user-info {
    right: 60px;
    height: 100%;
+   cursor: pointer;
  }
  .navigation-bar .user-img {
    background: rgba(109, 151, 234, 0.25);
@@ -80,6 +109,30 @@
  }
  .navigation-bar .user {
    display: flex;
+   position: relative
+ }
+ .navigation-bar .user div:first-child {
+   position: absolute;
+   top: 30px;
+   right: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   background: wheat;
+   min-width: 120px;
+   border-radius: 4px;
+ }
+ .navigation-bar .user div:first-child a {
+   margin: 0;
+   padding: 10px;
+   background: #FFFFFF;
+   width: 100%;
+   text-align: initial;
+   box-shadow: 0px 0px 4px rgb(109 151 234 / 25%);
+   transition: 0.2s;
+ }
+ .navigation-bar .user div:first-child a:hover {
+   background: #F9F9F9;
  }
  .navigation-bar .user span {
    margin-left: 5px;

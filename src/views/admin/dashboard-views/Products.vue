@@ -1,10 +1,14 @@
 <template>
-  this is the product page
+  <div class="products">
+    this is the products page
+  </div>
 </template>
 
 <script>
-export default {
+import Loading from '../../../components/Loading.vue'
 
+export default {
+  components: { Loading }
 }
 </script>
 

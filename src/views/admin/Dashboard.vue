@@ -4,8 +4,13 @@
         <div class="dashboard">
             <NavigationBar />
             <div>
-                <SideBar />
-                <router-view/>
+                <SideBar class="sidebar" />
+                <div class="container" v-if="true"> <!-- v-if="containerLoaded" -->
+                    <router-view/>
+                </div>
+                <div v-else class="container-loading">
+                    <Loading />
+                </div>
             </div>
         </div>
     </div>
@@ -57,5 +62,11 @@ export default {
 }
 .dashboard > div {
     display: flex;
+}
+.dashboard .sidebar {
+    flex-basis: 250px;
+}
+.dashboard .container, .dashboard .container-loading {
+    flex-grow:1;
 }
 </style>

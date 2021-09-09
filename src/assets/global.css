@@ -21,6 +21,9 @@
 input {
     outline: none;
 }
+input[type=submit] {
+    cursor: pointer;
+}
 input[type=checkbox]:focus, input[type=submit]:focus, input[type=button]:focus {
     box-shadow: 0 0 0 2pt #adc8ff;
 }
