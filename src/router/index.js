@@ -9,8 +9,8 @@ import Products from '../views/admin/dashboard-views/Products.vue'
 import Billing from '../views/admin/dashboard-views/Billing.vue'
 import Customers from '../views/admin/dashboard-views/Customers.vue'
 import Shipping from '../views/admin/dashboard-views/Shipping.vue'
+import AddProduct from '../views/admin/dashboard-views/AddProduct.vue'
 import store from '../store'
-import AddProduct from '../components/CrudProduct/AddProduct.vue'
 const routes = [
   {
     path: '/',
