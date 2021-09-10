@@ -12,7 +12,7 @@
                             <i class="fas fa-chevron-right" v-if="!isLast(breadCrumbs, index)"></i>
                         </div>
                     </div>
-                    <router-view/>
+                    <router-view class="container-link"/>
                 </div>
                 <div v-else class="container-loading">
                     <Loading />
@@ -106,5 +106,8 @@ export default {
 }
 .dashboard .container {
     flex-grow: 1;
+}
+.dashboard .container-link {
+    margin-right: 60px;
 }
 </style>

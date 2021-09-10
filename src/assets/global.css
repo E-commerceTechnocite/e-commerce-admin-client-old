@@ -40,3 +40,7 @@ input[type=checkbox]:focus, input[type=submit]:focus, input[type=button]:focus {
 .action:hover {
     background: #83a6ec;
 }
+
+.trashButton .fas, .informationIcon .fas {
+    color: #ffffff;
+}
