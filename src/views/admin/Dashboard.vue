@@ -6,6 +6,12 @@
             <div>
                 <SideBar class="sidebar" />
                 <div class="container" v-if="true"> <!-- v-if="containerLoaded" -->
+                        <div class="breadcrumbs">
+                            <div v-for="(crumb, index) in breadCrumbs" :key="index">
+                                <span>{{crumb}}</span>
+                                <i class="fas fa-chevron-right" v-if="!isLast(breadCrumbs, index)"></i>
+                            </div>
+                        </div>
                     <router-view/>
                 </div>
                 <div v-else class="container-loading">
@@ -24,9 +30,9 @@
 </template>
 
 <script>
-import { onMounted, onUpdated, ref } from '@vue/runtime-core'
+import { computed, onMounted, onUpdated, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Loading from '../../components/Loading.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
@@ -40,16 +46,31 @@ export default {
     setup() {
         const store = useStore()
         const router = useRouter()
+        const route = useRoute()
         const loaded = ref(false)
+        const breadCrumbs = computed(() => store.getters['dashboard/GET_BREADCRUMBS'])
         const checkUser = async () => {
                 const response = await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY')
                 if (!response) router.push({name: 'LoginAdmin'})
-                if (!loaded.value) loaded.value = true 
-            
-        } 
-        onMounted(checkUser)
-        onUpdated(checkUser)
-        return { store, loaded }
+                if (response) loaded.value = true 
+        }
+        const isLast = (array, index) => {
+            if (index === array.length -1) return true
+        }
+        onMounted(() => {
+            checkUser()
+            store.dispatch('dashboard/WATCH_BREADCRUMBS', route.path)
+        })
+        onUpdated(() => {
+            checkUser()
+            store.dispatch('dashboard/WATCH_BREADCRUMBS', route.path)
+        })
+        return { 
+            store, 
+            loaded,
+            breadCrumbs,
+            isLast 
+        }
     }
 }
 </script>
@@ -68,5 +89,15 @@ export default {
 }
 .dashboard .container, .dashboard .container-loading {
     flex-grow:1;
+}
+.dashboard .breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.dashboard .breadcrumbs i {
+    font-size: 12px;
+    margin: 0 10px;
 }
 </style>

@@ -25,8 +25,10 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    redirect: {name: 'DashboardHome'},
     children: [
       {
+        alias: "/",
         path: 'home',
         name: 'DashboardHome',
         component: DashboardHome
@@ -53,7 +55,7 @@ const routes = [
       },
     ]
   },
-  // Redirect any invalid path to 404 page
+  // 404 not found
   {
     path: '/:catchall(.*)',
     name: 'NotFound',

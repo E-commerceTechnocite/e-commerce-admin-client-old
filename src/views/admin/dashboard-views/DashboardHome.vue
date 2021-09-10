@@ -1,5 +1,7 @@
 <template>
- welcome to the dashboard
+    <div class="dashboard-home">
+        welcome to the dashboard
+    </div>
 </template>
 
 <script>

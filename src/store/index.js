@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 import auth from './modules/auth'
+import dashboard from './modules/admin/dashboard'
+
 
  const store = createStore({
   state: {
@@ -7,7 +9,8 @@ import auth from './modules/auth'
   getters: {
   },
   modules: {
-    auth
+    auth,
+    dashboard
   }
 })
 export default store
