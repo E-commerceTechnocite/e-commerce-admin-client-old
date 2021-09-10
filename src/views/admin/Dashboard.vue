@@ -6,6 +6,7 @@
                 <SideBar />
                 <div class="container">
                    <DailyInformation />
+                   <GraphicInformation />
                    <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
                 </div>
             </div>
@@ -27,6 +28,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
 import ProductInformation from '@/components/ProductInformation.vue'
 import DailyInformation from '@/components/DailyInformation.vue'
+import GraphicInformation from '@/components/GraphicInformation.vue'
 
 export default {
     name: 'NavBar',
@@ -34,7 +36,8 @@ export default {
         NavigationBar,
         SideBar,
         ProductInformation,
-        DailyInformation
+        DailyInformation,
+        GraphicInformation
     },
     setup() {
         const store = useStore()
