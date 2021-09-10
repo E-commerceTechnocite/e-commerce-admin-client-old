@@ -5,9 +5,8 @@
             <div>
                 <SideBar />
                 <div class="container">
-                   <!-- <ProductInformation :numberOfListRows="numberOfListRows" /> -->
                    <DailyInformation />
-                   <ProductInformation :numberOfListRows="numberOfListRows" />
+                   <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
                 </div>
             </div>
             
@@ -40,9 +39,11 @@ export default {
     setup() {
         const store = useStore()
         onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        let numberOfListRows = 3
-        return { 
-            numberOfListRows,
+        let beginNumberOfListRows = 0
+        let endNumberOfListRows = 3
+        return {
+            beginNumberOfListRows,
+            endNumberOfListRows,
             store 
         }
     }

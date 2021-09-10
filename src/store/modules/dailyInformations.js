@@ -23,7 +23,7 @@ export default ({
             console.log(jsonData)
             if (jsonData !== null) commit('DAILY_INFORMATIONS_SET', {data: jsonData})
             } catch (err) {
-                console.log("ERREEEEEEEUUUUURRRRR") 
+                console.log("ERREUR") 
                 return err
             }
         }
