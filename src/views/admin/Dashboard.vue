@@ -5,8 +5,8 @@
             <div>
                 <SideBar />
                 <div class="container">
-                    <ProductInformation />
-
+                   <ProductInformation :numberOfListRows="numberOfListRows" /> 
+                   <!-- <DailyInformation /> -->
                 </div>
             </div>
             
@@ -26,18 +26,24 @@ import { useStore } from 'vuex'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
 import ProductInformation from '@/components/ProductInformation.vue'
+import DailyInformation from '@/components/DailyInformation.vue'
 
 export default {
     name: 'NavBar',
     components: {
         NavigationBar,
         SideBar,
-        ProductInformation
+        ProductInformation,
+        DailyInformation
     },
     setup() {
         const store = useStore()
         onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        return { store }
+        let numberOfListRows = 3
+        return { 
+            numberOfListRows,
+            store 
+        }
     }
 }
 </script>
