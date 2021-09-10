@@ -49,5 +49,14 @@
       "price": "25€",
       "taxPrice": "21%"
     }
+  ],
+
+  "dailyInformations": [
+    {
+      "sales": "126000",
+      "profit": "42000",
+      "users": "1263",
+      "newUsers": "37"
+    }
   ]
 }

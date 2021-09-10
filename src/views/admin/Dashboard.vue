@@ -5,8 +5,9 @@
             <div>
                 <SideBar />
                 <div class="container">
-                   <ProductInformation :numberOfListRows="numberOfListRows" /> 
-                   <!-- <DailyInformation /> -->
+                   <!-- <ProductInformation :numberOfListRows="numberOfListRows" /> -->
+                   <DailyInformation />
+                   <ProductInformation :numberOfListRows="numberOfListRows" />
                 </div>
             </div>
             

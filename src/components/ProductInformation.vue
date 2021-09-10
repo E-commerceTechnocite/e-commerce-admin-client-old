@@ -109,7 +109,5 @@ body {
     border: none;
 }
 
-.fas {
-    color: #ffffff;
-} 
+
 </style>
