@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/client/Home.vue'
 import LoginAdmin from '../views/admin/LoginAdmin.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
+import Products from '../components/CrudProduct/Products.vue'
 import store from '../store'
-
+import AddProduct from '../components/CrudProduct/AddProduct.vue'
 const routes = [
   {
     path: '/',
@@ -19,6 +20,17 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  // management products 
+  {
+    path: '/dashboard/products',
+    name: 'Products',
+    component: Products
+  },
+  {
+    path: '/add-product',
+    name: 'AddProduct',
+    component: AddProduct
   },
 ]
 

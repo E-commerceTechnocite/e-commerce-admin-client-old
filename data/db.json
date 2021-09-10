@@ -18,5 +18,16 @@
         "role"
       ]
     }
-  ]
+  ],
+
+     
+     "products": [
+        {"id":1, "title" : "laptop" ,"reference" :"product01", "description":"laptop serie oneyes" ,"price":599},
+        {"id":2, "title" : "TVp" ,"reference" :"product02", "description":"Samsung tv " ,"price":800},
+        {"id":3, "title" : "Desk" ,"reference" :"product03", "description":"Desk " ,"price":1500},
+        {"id":4, "title" : "GSM" ,"reference" :"product03", "description":"Gsm 5e generation" ,"price":900}
+    ]
+
+     
+    
 }
