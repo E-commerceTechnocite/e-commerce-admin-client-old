@@ -1,5 +1,5 @@
 <template>
-    <div class="login-admin">
+    <div class="login-admin" v-if="loaded"> <!-- v-if="loaded" -->
         <div>
             <h1>LOGO</h1>
             <h2>Sign in to WNDR</h2>
@@ -20,30 +20,52 @@
                 </div>
                     <input type="submit" value="login" class="action">
             </form>
-        </div>  
+        </div>
+    </div>
+    <div v-else>
+        <Loading />
     </div>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import Loading from '../../components/Loading.vue'
+
 
 export default {
-    
+    components: {
+        Loading
+    },
     setup() {
         const store = useStore()
+        const router = useRouter()
         const email = ref('')
         const password = ref('')
+        const loaded = ref(false)
         const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
         const handleSubmit = async () => {
-            await store.dispatch( 'auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
-            await store.dispatch( 'auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'Dashboard'} )
+            if (loaded.value) {
+                loaded.value = false
+                await store.dispatch( 'auth/AUTH_FETCH_USER_TOKEN', {email: email.value, password: password.value} )
+                await store.dispatch( 'auth/AUTH_STORE_USER_TOKEN', {token: token.value, uri: 'DashboardHome'} )
+            }
         }
+        const checkUser = async () => {
+                const response = await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY')
+                if (response) return router.push({name: 'DashboardHome'})
+                if (!loaded.value) loaded.value = true
+            
+        }
+        onMounted(checkUser)
+
         return {
             email,
             password,
             token,
+            loaded,
             handleSubmit
         }
     }

@@ -27,7 +27,7 @@ npm run test:e2e
 
 ### Run json-server
 ```
-npx json-server data/db.json -m ./node_modules/json-server-auth
+npx json-server -p 4000 data/db.json -m ./node_modules/json-server-auth
 ```
 
 ### Customize configuration

@@ -1,4 +1,7 @@
 <template>
+
+<div class="product-information">
+    <button>PRODUCT+</button>
     <div class="productListing" v-for="product in data.slice(beginNumberOfListRows,endNumberOfListRows)" :key="product">
         <div class="titleProduct item" >{{ product.titleProduct }}</div>
         <div class="ref item">{{ product.refr }}</div>
@@ -8,6 +11,8 @@
         <button class="editButton">EDIT</button>
         <button class="trashButton"><i class="fas fa-trash"></i></button>
     </div>
+</div>
+
 </template>
 
 <script>
@@ -28,15 +33,6 @@ export default ({
 </script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #E5E5E5; 
-}
 
 .productListing {
     background-color: #ffffff;
@@ -49,7 +45,7 @@ body {
     align-items: center;
 }
 
-.item {
+.productListing .item {
     background-color: #ffffff;
     color: #67748E;
     font-size: 15px;
@@ -63,7 +59,7 @@ body {
     box-sizing: border-box; 
 }
 
-.titleProduct {
+.productListing .titleProduct {
     /* flex-grow: 3; */
     max-width: 250px;
     width: 100%;

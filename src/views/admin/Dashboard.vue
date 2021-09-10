@@ -1,62 +1,105 @@
 <template>
+<div v-if="loaded">
     <div v-if="$store.getters['auth/AUTH_IS_AUTHENTICATED']">
-        <div v-if="true" class="dashboard">
+        <div class="dashboard">
             <NavigationBar />
             <div>
-                <SideBar />
-                <div class="container">
-                   <DailyInformation />
-                   <GraphicInformation />
-                   <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
+                <SideBar class="sidebar" />
+                <div class="container" v-if="true"> <!-- v-if="containerLoaded" -->
+                    <div class="breadcrumbs">
+                        <div v-for="(crumb, index) in breadCrumbs" :key="index">
+                            <span>{{crumb}}</span>
+                            <i class="fas fa-chevron-right" v-if="!isLast(breadCrumbs, index)"></i>
+                        </div>
+                    </div>
+                    <router-view/>
+                </div>
+                <div v-else class="container-loading">
+                    <Loading />
                 </div>
             </div>
             
-        </div>
-        <div v-else>
-            loading
         </div>
     </div>
     <div v-else>
         Error 404
     </div>
+</div>
+<div v-else>
+    <Loading />
+</div>
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
+import { computed, onMounted, onUpdated, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
+import Loading from '../../components/Loading.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import SideBar from '@/components/SideBar.vue'
-import ProductInformation from '@/components/ProductInformation.vue'
-import DailyInformation from '@/components/DailyInformation.vue'
-import GraphicInformation from '@/components/GraphicInformation.vue'
 
 export default {
-    name: 'NavBar',
     components: {
         NavigationBar,
         SideBar,
-        ProductInformation,
-        DailyInformation,
-        GraphicInformation
+        Loading
     },
     setup() {
         const store = useStore()
-        onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        let beginNumberOfListRows = 0
-        let endNumberOfListRows = 3
-        return {
-            beginNumberOfListRows,
-            endNumberOfListRows,
-            store 
+        const router = useRouter()
+        const route = useRoute()
+        const loaded = ref(false)
+        const breadCrumbs = computed(() => store.getters['dashboard/GET_BREADCRUMBS'])
+        const checkUser = async () => {
+                const response = await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY')
+                if (!response) router.push({name: 'LoginAdmin'})
+                if (response) loaded.value = true 
+        }
+        const isLast = (array, index) => {
+            if (index === array.length -1) return true
+        }
+        onMounted(() => {
+            checkUser()
+            store.dispatch('dashboard/WATCH_BREADCRUMBS', route.path)
+        })
+        onUpdated(() => {
+            checkUser()
+            store.dispatch('dashboard/WATCH_BREADCRUMBS', route.path)
+        })
+        return { 
+            store, 
+            loaded,
+            breadCrumbs,
+            isLast 
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .dashboard {
     display: flex;
     flex-direction: column;
+    /* position: fixed; */
+}
+.dashboard > div {
+    display: flex;
+}
+.dashboard .sidebar {
+    flex-basis: 250px;
+}
+.dashboard .container, .dashboard .container-loading {
+    flex-grow:1;
+}
+.dashboard .breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.dashboard .breadcrumbs i {
+    font-size: 12px;
+    margin: 0 10px;
 }
 .dashboard>div {
     display: flex;

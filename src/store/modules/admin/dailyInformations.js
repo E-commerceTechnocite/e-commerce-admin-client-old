@@ -16,7 +16,7 @@ export default ({
     actions: {
         FETCH_INFORMATIONS: async({commit}) => {
             try {
-                let response = await fetch ('http://localhost:3001/dailyInformations', {
+                let response = await fetch ('http://localhost:4000/dailyInformations', {
                 headers: {"Content-Type": "application/json"}
             }) 
             const jsonData = await response.json()
