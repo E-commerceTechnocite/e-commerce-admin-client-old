@@ -1,5 +1,5 @@
 <template>
-    <div class="productListing" v-for="product in data" :key="product">
+    <div class="productListing" v-for="product in data.slice(0,3)" :key="product">
         <div class="titleProduct item" >{{ product.titleProduct }}</div>
         <div class="ref item">{{ product.refr }}</div>
         <div class="category item">{{ product.category }}</div>
@@ -19,9 +19,6 @@ export default ({
         const store = useStore()
         store.dispatch('products/FETCH_PRODUCTS') 
         const data = computed(() => store.getters['products/PRODUCTS_'])
-        /*const array = data.slice(0,2)
-        console.log(array)*/
-        console.log(data)
         return {
             data
         }  

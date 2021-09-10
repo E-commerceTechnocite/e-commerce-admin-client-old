@@ -41,6 +41,13 @@
       "category": "cat3",
       "price": "10€",
       "taxPrice": "12%"
+    },
+    {
+      "titleProduct": "Clavier",
+      "refr": "ref4",
+      "category": "cat4",
+      "price": "25€",
+      "taxPrice": "21%"
     }
   ]
 }
