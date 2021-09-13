@@ -1,9 +1,5 @@
 <template>
-
 <div class="product-information">
-    <div class="productButtonContainer">
-        <button class="productButton">PRODUCT+</button>
-    </div>
     <div class="productListing" v-for="product in data.slice(beginNumberOfListRows,endNumberOfListRows)" :key="product">
         <div class="titleProduct item" >{{ product.titleProduct }}</div>
         <div class="ref item">{{ product.refr }}</div>
@@ -14,7 +10,6 @@
         <button class="trashButton"><i class="fas fa-trash"></i></button>
     </div>
 </div>
-
 </template>
 
 <script>
@@ -37,9 +32,9 @@ export default ({
 <style>
 .productListing {
     background-color: #ffffff;
-    box-shadow: 4px 4px 4px rgba(109, 151, 234, 0.25);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     padding: 10px 25px;
-    margin: 15px 0px 15px 0px;
+    margin: 10px 0px 15px 0px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -66,23 +61,23 @@ export default ({
     width: 100%;
 }
 
-.ref {
+.productListing .ref {
     flex-grow: 1;
 }
 
-.category {
+.productListing .category {
     flex-grow: 2;
 }
 
-.price {
+.productListing .price {
     flex-grow: 1;
 }
 
-.taxPrice {
+.productListing .taxPrice {
     flex-grow: 1;
 }
 
-.editButton {
+.productListing .editButton {
     border-radius: 5px;
     margin: 5px 5px 5px 25px;
     padding: 2px 20px;
@@ -96,7 +91,7 @@ export default ({
     border: none;
 }
 
-.trashButton {
+.productListing .trashButton {
     border-radius: 4px;
     margin: 5px;
     padding: 2px 5px;
@@ -106,20 +101,7 @@ export default ({
     border: none;
 }
 
-.productButtonContainer {
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.productButton {
-    border-radius: 5px;
-    padding: 10px 20px;
-    background-color: #6D97EA;
-    color: #FFFFFF;
-    box-shadow: 0px 0px 4px #6D97EA;
-    font-size: 15px;
-    font-family: Roboto, Arial, Helvetica, sans-serif; 
-    border: none;
+.productListing .trashButton .fas {
+    color:#ffffff;
 }
 </style>

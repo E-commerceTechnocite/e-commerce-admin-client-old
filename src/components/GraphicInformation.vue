@@ -19,9 +19,9 @@
     background-color: #ffffff;  
     color: #67748E;
     border-radius: 4px;
-    box-shadow: 4px 4px 4px rgba(109, 151, 234, 0.25);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     /*max-width: 700px;*/
-    height: 300px;
+    height: 400px;
     /*flex-grow: 1;*/
     width: 100%;
     display: flex;

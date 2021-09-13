@@ -48,6 +48,62 @@
       "category": "cat4",
       "price": "25€",
       "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "TV",
+      "refr": "ref5",
+      "category": "cat",
+      "price": "750€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Smartphone",
+      "refr": "ref2",
+      "category": "cat2",
+      "price": "100€",
+      "taxPrice": "6%"
+    },
+    {
+      "titleProduct": "Stylet",
+      "refr": "ref3",
+      "category": "cat3",
+      "price": "10€",
+      "taxPrice": "12%"
+    },
+    {
+      "titleProduct": "Clavier",
+      "refr": "ref4",
+      "category": "cat4",
+      "price": "25€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Ordinateur",
+      "refr": "ref1",
+      "category": "cat1",
+      "price": "150€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Smartphone",
+      "refr": "ref2",
+      "category": "cat2",
+      "price": "100€",
+      "taxPrice": "6%"
+    },
+    {
+      "titleProduct": "Stylet",
+      "refr": "ref3",
+      "category": "cat3",
+      "price": "10€",
+      "taxPrice": "12%"
+    },
+    {
+      "titleProduct": "Clavier",
+      "refr": "ref4",
+      "category": "cat4",
+      "price": "25€",
+      "taxPrice": "21%"
     }
   ],
 

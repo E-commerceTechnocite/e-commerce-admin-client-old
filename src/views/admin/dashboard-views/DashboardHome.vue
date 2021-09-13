@@ -2,6 +2,10 @@
     <div class="dashboard-home">
         <DailyInformation />
         <GraphicInformation />
+        <div class="productButtonContainer">
+            <h4>Last products added</h4>
+            <button class="action">PRODUCT+</button>
+        </div>
         <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
     </div>
 </template>
@@ -34,5 +38,22 @@ export default {
 </script>
 
 <style>
+.dashboard-home .productButtonContainer {
+    margin-top:15px;
+    display:flex;
+    flex-direction: row;
+    /*justify-content: flex-end;*/
+    justify-content: space-between;
+}
 
+.dashboard-home .productButton {
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #6D97EA;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 4px #6D97EA;
+    font-size: 15px;
+    font-family: Roboto, Arial, Helvetica, sans-serif; 
+    border: none;
+}
 </style>

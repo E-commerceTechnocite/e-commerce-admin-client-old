@@ -2,39 +2,39 @@
     <div class="daily-information"> 
         <div class="wrap" v-for="info in data" :key="info">
             <div class="informationItem item1">
-                <div>
+                <div class="informationContainer">
                     <h4>Sales</h4>
                     <p class="price">{{ info.sales }} €</p>
                 </div>
                 <div>
-                    <button class="informationIcon"><i class="fas fa-coins"></i></button>
+                    <i class="fas fa-coins"></i>
                 </div>
             </div>
             <div class="informationItem">
-                <div>
+                <div class="informationContainer">
                     <h4>Profit</h4>
                     <p class="price">{{ info.profit }} €</p>
                 </div>
                 <div>
-                    <button class="informationIcon"><i class="fas fa-wallet"></i></button>
+                    <i class="fas fa-wallet"></i>
                 </div>
             </div>
             <div class="informationItem">
-                <div>
+                <div class="informationContainer">
                     <h4>Users</h4>
                     <p class="price">{{ info.users }}</p>
                 </div>
                 <div>
-                    <button class="informationIcon"><i class="fas fa-users"></i></button>
+                    <i class="fas fa-users"></i>
                 </div>
             </div>
             <div class="informationItem item4">
-                <div>
+                <div class="informationContainer">
                     <h4>New Users</h4>
                     <p class="price">{{ info.newUsers }}</p>
                 </div>
                 <div>
-                    <button class="informationIcon"><i class="fas fa-user-plus"></i></button>
+                    <i class="fas fa-user-plus"></i>
                 </div>
             </div>     
         </div>
@@ -46,7 +46,6 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default ({
-    /*props: ['numberOfListRows'],*/
     setup() {
         const store = useStore()
         store.dispatch('dailyInformations/FETCH_INFORMATIONS') 
@@ -71,12 +70,13 @@ export default ({
     background-color: #ffffff;  
     color: #67748E;
     border-radius: 4px;
-    box-shadow: 4px 4px 4px rgba(109, 151, 234, 0.25);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     font-size: 15px;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     margin: 0px 15px 0px 15px;
     padding: 15px;
-    max-width: 350px;
+    height: 75px;
+    max-width: 375px;
     flex-grow: 1;
     display: flex;
     flex-direction: row;
@@ -93,16 +93,15 @@ export default ({
     margin: 0px 0px 0px 15px;
 }
 
-.daily-information .informationIcon {
-    border-radius: 4px;
-    margin: 5px;
-    padding: 4px 10px;
-    background-color: #6D97EA;
-    box-shadow: 0px 0px 5px #6D97EA;
-    font-size: 15px;
-    border: none;
+.daily-information .informationContainer {
+    margin-left: 15px;
 }
 
+.daily-information .fas {
+    margin-right: 15px;
+    font-size: 20px;
+    color: #535353;
+}
 /*.title {
 
 }
