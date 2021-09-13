@@ -1,5 +1,14 @@
 <template>
     <div class="sidebar">
+        <div class="logo">
+            <router-link :to="{name: 'DashboardHome'}"><h1>LOGO</h1></router-link>
+        </div>
+        <div class="search-bar">
+            <div>
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
         <nav>
             <div>
                 <ul>
@@ -32,7 +41,6 @@ export default {
         const store = useStore()
         const logout = () => { store.dispatch('auth/AUTH_LOGOUT', true)}
         const isRouteActive = (path) => { return router.resolve(path).fullPath === route.path }
-        
         return { logout, isRouteActive }
     },
 }
@@ -41,15 +49,53 @@ export default {
 <style>
 .sidebar {
     display: flex;
-    justify-content: center;
-    width: 250px;
+    justify-content: flex-start;
+    background: #0A0A0A;
+    width: 220px;
     height: 100vh;
-    margin-top: 30px;
+    padding: 30px 20px 0 20px;
+    position:fixed;
 }
+.sidebar .logo {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+.sidebar .logo h1{
+    font-size: 20px;
+    color: white;
+}
+.sidebar .search-bar {
+    background: #292929;
+    border-radius: 10px;
+    padding: 10px 0;
+    width: 100%;
+}
+.sidebar .search-bar div {
+    height: 20px;
+
+}
+.sidebar .search-bar i {
+    color: white;
+    margin: 0 13px;
+    font-size: 15px;
+}
+.sidebar .search-bar input{
+    background: none;
+    border: none;
+}
+.sidebar .search-bar input::placeholder {
+    color: #828282;
+    font-size: 15px;
+
+}
+
+
 .sidebar nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 30px;
 }
 .sidebar nav > div {
     margin-bottom: 20px;

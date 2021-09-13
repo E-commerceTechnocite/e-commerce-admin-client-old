@@ -1,50 +1,59 @@
 <template>
   <div class="navigation-bar">
-    <div class="logo">
-      <router-link :to="{name: 'DashboardHome'}"><h1>LOGO</h1></router-link>
+    <div class="breadcrumbs">
+      <div v-for="(crumb, index) in breadCrumbs" :key="index">
+          <span>{{crumb}}</span>
+          <i class="fas fa-chevron-right" v-if="!isLast(breadCrumbs, index)"></i>
+      </div>
     </div>
-      <div class="search-bar">
-        <div>
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="search">
+    <div class="user-info">
+      <div class="user" >
+        <div ref="dropMenu" v-show="userDropMenu">
+          <router-link to="#">Profile</router-link>
+          <router-link to="#" @click="logout">Logout</router-link>
+        </div>
+        <div  @click="handleClick">
+          <span>John</span>
+          <span>Doe</span>
+          <i class="fas fa-sort-down"></i>
         </div>
       </div>
-      <div class="user-info">
-        <div class="user" >
-          <div ref="dropMenu" v-show="userDropMenu">
-            <router-link to="#">Profile</router-link>
-            <router-link to="#" @click="logout">Logout</router-link>
-          </div>
-          <div  @click="handleClick">
-            <span>John</span>
-            <span>Doe</span>
-            <i class="fas fa-sort-down"></i>
-          </div>
-        </div>
-        <div class="user-img">
-          <img src="" alt="">
-        </div>
+      <div class="user-img">
+        <img src="" alt="">
       </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import { useStore } from 'vuex'
+import { onMounted, onUpdated } from '@vue/runtime-core'
+import { useRoute } from 'vue-router'
 
 export default {
   setup() {
     const store = useStore()
+    const route = useRoute()
     const dropMenu = ref(null)
     const userDropMenu = ref(false)
+    const breadCrumbs = computed(() => store.getters['dashboard/GET_BREADCRUMBS'])
     const logout = () => { store.dispatch('auth/AUTH_LOGOUT', true)}
     const handleClick = () => {
       userDropMenu.value = !userDropMenu.value
     }
-    
+    const isLast = (array, index) => {
+      if (index === array.length -1) return true
+    }
+    onMounted(() => store.dispatch( 'dashboard/WATCH_BREADCRUMBS', route.path) )
+
+    onUpdated(() => store.dispatch( 'dashboard/WATCH_BREADCRUMBS', route.path) )
+
     return {
+      breadCrumbs,
       userDropMenu,
       dropMenu,
+      isLast,
       handleClick,
       logout
     }
@@ -53,47 +62,46 @@ export default {
 </script>
 
 <style>
-  .navigation-bar {
+.navigation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px;
+}
+.navigation-bar .breadcrumbs > div {
+  display: inline-block;
+  font-weight: bold;
+}
+.navigation-bar .breadcrumbs i {
+  font-size: 12px;
+  margin: 0 10px;
+}
+.navigation-bar .user-info {
+  display: flex;
+}
+.navigation-bar .user-info .user-img {
+  width: 38px;
+  height: 38px;
+  background: #DDDDDD;
+  border-radius: 50%;
+}
+
+
+  /* .navigation-bar {
     position: relative;
-    background: #FFFFFF;
-    width: 100vw;
     height: 85px;
-    box-shadow: 0px 4px 4px rgba(109, 151, 234, 0.25)
   } 
-  .navigation-bar .logo, .navigation-bar .search-bar, .navigation-bar .user-info {
+  .navigation-bar .user-info {
    position: absolute;
    display: flex;
    justify-content: center;
    align-items: center;
-
   }
- .navigation-bar .logo {
-   left: 0;
-   width: 250px;
-   height: 100%;
- }
- .navigation-bar .search-bar {
-   left: 250px;
-   height: 100%;
- }
  .navigation-bar .search-bar > div {
    background: #FFFFFF;
    padding: 10px;
    border-radius: 4px;
    border: 1px solid #D6D6D6;
- }
- .navigation-bar .search-bar input {
-   border: none;
-   padding: 3px;
-   margin-left: 5px;
- }
-  .navigation-bar .search-bar input::placeholder {
-    color: #BBBBBB;
-  }
- .navigation-bar .search-bar i {
-   color: #BBBBBB;
-   font-size: 13px;
-   margin-left: 10px;
  }
  .navigation-bar .user-info {
    right: 60px;
@@ -142,6 +150,6 @@ export default {
    align-self: flex-start;
  }
 
-
+ */
 
 </style>

@@ -13,7 +13,7 @@ export default {
 
 <style>
 body {
-  background: #F9F9F9;
+  background: #EEEEEE;
 }
 #app {
   font-family: Roboto-Regular, Avenir, Helvetica, Arial, sans-serif;

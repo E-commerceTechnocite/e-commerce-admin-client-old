@@ -99,7 +99,8 @@ import Modal from './Modal.vue'
     flex-wrap: wrap;
     min-height: 800px;
     /* align-items: flex-start; */
-    margin: 0 60px 200px 0;
+    margin: 30px 60px 200px 0;
+    border-radius: 5px;
 }
 .add-product form, .add-product .image-product {
     height: 600px;

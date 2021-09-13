@@ -2,17 +2,12 @@
 <div v-if="loaded">
     <div v-if="$store.getters['auth/AUTH_IS_AUTHENTICATED']">
         <div class="dashboard">
-            <NavigationBar />
-            <div>
-                <SideBar class="sidebar" />
+            <SideBar class="sidebar" />
+            <div class="view">
+                <NavigationBar :path="$route.fullPath"/>
                 <div class="container" v-if="true"> <!-- v-if="containerLoaded" -->
-                        <div class="breadcrumbs">
-                            <div v-for="(crumb, index) in breadCrumbs" :key="index">
-                                <span>{{crumb}}</span>
-                                <i class="fas fa-chevron-right" v-if="!isLast(breadCrumbs, index)"></i>
-                            </div>
-                        </div>
-                    <router-view/>
+                        
+                    <router-view /> <!-- class="container-link" -->
                 </div>
                 <div v-else class="container-loading">
                     <Loading />
@@ -48,28 +43,20 @@ export default {
         const router = useRouter()
         const route = useRoute()
         const loaded = ref(false)
-        const breadCrumbs = computed(() => store.getters['dashboard/GET_BREADCRUMBS'])
         const checkUser = async () => {
                 const response = await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY')
                 if (!response) router.push({name: 'LoginAdmin'})
                 if (response) loaded.value = true 
         }
-        const isLast = (array, index) => {
-            if (index === array.length -1) return true
-        }
         onMounted(() => {
             checkUser()
-            store.dispatch('dashboard/WATCH_BREADCRUMBS', route.path)
         })
         onUpdated(() => {
             checkUser()
-            store.dispatch('dashboard/WATCH_BREADCRUMBS', route.path)
         })
         return { 
             store, 
-            loaded,
-            breadCrumbs,
-            isLast 
+            loaded
         }
     }
 }
@@ -78,26 +65,36 @@ export default {
 <style scoped>
 .dashboard {
     display: flex;
-    flex-direction: column;
-    /* position: fixed; */
+    /* overflow-x: hidden; */
 }
 .dashboard > div {
     display: flex;
+    flex-direction: column;
+}
+.dashboard .view {
+    background: lightcoral;
+    margin-left: 260px;
+    flex-grow: 1;
 }
 .dashboard .sidebar {
-    flex-basis: 250px;
+    flex-basis: 260px;
 }
 .dashboard .container, .dashboard .container-loading {
+    background: lightcyan;
     flex-grow:1;
 }
 .dashboard .breadcrumbs {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
+    margin: 36px 0;
     font-weight: bold;
 }
 .dashboard .breadcrumbs i {
     font-size: 12px;
     margin: 0 10px;
+}
+.dashboard .container-link {
+    margin-right: 60px;
+    background: black;
 }
 </style>
