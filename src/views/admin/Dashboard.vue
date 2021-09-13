@@ -81,6 +81,7 @@ export default {
 .dashboard .container, .dashboard .container-loading {
     background: lightcyan;
     flex-grow:1;
+    padding: 0 0 0 20px;
 }
 .dashboard .breadcrumbs {
     display: flex;

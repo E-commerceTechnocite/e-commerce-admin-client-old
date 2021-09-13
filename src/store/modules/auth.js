@@ -42,7 +42,7 @@ export default ({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email.email, password: email.password})
             } 
-            try {
+            try { /*  */ /* "http://localhost:3000/v1/o-auth/login" */
                 let response = await fetch("http://localhost:4000/login", requestOptions) 
                 if (!response.ok) router.push({name: 'LoginAdmin'})
                 const data = await response.json()
