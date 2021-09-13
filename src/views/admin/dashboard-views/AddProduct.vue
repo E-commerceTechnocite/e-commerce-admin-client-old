@@ -51,8 +51,8 @@
            </div>
            
            <div class="description-product"> <h4>Description</h4>
-             <vue-editor v-model="description"></vue-editor>
-            <!-- <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>  -->
+            
+            <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>  
             
            </div>
            
@@ -66,12 +66,12 @@
 </template>
 
 <script>
-import { VueEditor } from  "vue2-editor";
+// import { VueEditor } from  "vue2-editor";
 import { ref} from 'vue'
 import Modal from './Modal.vue'
     export default {
         components : {
-            Modal, VueEditor
+            Modal
         },
         
         setup(){
