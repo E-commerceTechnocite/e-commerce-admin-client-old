@@ -78,78 +78,41 @@ export default {
 }
 .navigation-bar .user-info {
   display: flex;
+  align-items: center;
 }
+.navigation-bar .user-info i {
+  margin-left: 10px;
+}
+ .navigation-bar .user-info span {
+   margin-left: 5px;
+ }
 .navigation-bar .user-info .user-img {
   width: 38px;
   height: 38px;
   background: #DDDDDD;
   border-radius: 50%;
+  margin-left: 10px;
 }
-
-
-  /* .navigation-bar {
-    position: relative;
-    height: 85px;
-  } 
-  .navigation-bar .user-info {
-   position: absolute;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-  }
- .navigation-bar .search-bar > div {
-   background: #FFFFFF;
-   padding: 10px;
-   border-radius: 4px;
-   border: 1px solid #D6D6D6;
- }
- .navigation-bar .user-info {
-   right: 60px;
-   height: 100%;
-   cursor: pointer;
- }
- .navigation-bar .user-img {
-   background: rgba(109, 151, 234, 0.25);
-   width: 38px;
-   height: 38px;
-   border-radius: 50%;
-   margin-left: 15px;
- }
- .navigation-bar .user {
-   display: flex;
-   position: relative
- }
- .navigation-bar .user div:first-child {
-   position: absolute;
-   top: 30px;
-   right: 20px;
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   background: wheat;
-   min-width: 120px;
-   border-radius: 4px;
- }
- .navigation-bar .user div:first-child a {
-   margin: 0;
-   padding: 10px;
-   background: #FFFFFF;
-   width: 100%;
-   text-align: initial;
-   box-shadow: 0px 0px 4px rgb(109 151 234 / 25%);
-   transition: 0.2s;
- }
- .navigation-bar .user div:first-child a:hover {
-   background: #F9F9F9;
- }
- .navigation-bar .user span {
-   margin-left: 5px;
- }
- .navigation-bar .user i {
-   margin-left: 10px;
-   align-self: flex-start;
- }
-
- */
-
+.navigation-bar .user-info .user {
+  position: relative;
+}
+.navigation-bar .user-info .user div:first-child {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  top: 24px;
+  right: 40px;
+  width: 80px;
+}
+.navigation-bar .user-info .user div:first-child a{
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
+  background: rgb(255, 254, 254);
+  transition: 0.2s;
+}
+.navigation-bar .user-info .user div:first-child a:hover {
+  background: rgb(247, 246, 246);
+}
 </style>

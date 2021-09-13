@@ -66,13 +66,9 @@
 </template>
 
 <script>
-import { VueEditor } from  "vue2-editor";
 import { ref} from 'vue'
 import Modal from './Modal.vue'
     export default {
-        components : {
-            Modal, VueEditor
-        },
         
         setup(){
             const description=ref('')

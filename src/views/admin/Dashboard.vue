@@ -72,7 +72,6 @@ export default {
     flex-direction: column;
 }
 .dashboard .view {
-    background: lightcoral;
     margin-left: 260px;
     flex-grow: 1;
 }
