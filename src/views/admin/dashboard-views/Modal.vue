@@ -1,11 +1,10 @@
-
 <template>
     <div class="bloc-modal" v-if="isVisible">
         <div class="overlay"></div>
             <div class="modal-card">
                 <div class="btn-modal btn btn-danger" @click="showModal()">X</div>
                 <h3> Le contenu de la modale</h3>
-                <input type="file" @change="onFileSelected()">
+                <input type="file" @change="onFileSelected">
                 
             </div>
        
@@ -22,9 +21,11 @@ import {ref} from 'vue'
          const selectedFile=ref(null)
          return {selectedFile }
        },
-       methos:{
-           onFileSelected(){
-              
+       methods:{
+           onFileSelected(event){
+                this.selectedFile=event.target.files[0]
+                this.$emit('selectedProduct', this.selectedFile.name) 
+            //  console.log(this.selectedFile.name)
            }
 
            /*  shoonFileSelected: function(){

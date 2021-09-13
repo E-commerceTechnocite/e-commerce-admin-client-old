@@ -33,10 +33,28 @@
                 </div>
             </form>
            <div class="image-product"> <h4>Image Product</h4>
-            <button @click="showModal()">call modal</button>
+            
+                 <div class="image-download"  > 
+                     
+                   <img alt="Select image" src="" id="myImage" height="120" width="250">
+                 </div>
+                 <div class="images"> 
+                    <div > <img src="../../../../src/assets/images/pic2.jpg" width="250" height="120"  @click="showModal()">  </div>
+                    <div > <img src="../../../../src/assets/images/pic3.jpg" width="250" height="120" @click="showModal()">  </div>
+                    <div > <img src="../../../../src/assets/images/pic5.jpg" width="250" height="120" @click="showModal()">  </div>
+                    <div > <img src="../../../../src/assets/images/pic6.jpg" width="250" height="120" @click="showModal()">  </div> 
+                    <div > <img src="../../../../src/assets/images/pic7.jpg" width="250" height="120" @click="showModal()">  </div>
+                    <div > <img src="../../../../src/assets/images/pic8.jpg" width="250" height="120" @click="showModal()">  </div>
+                    <div > <img src="../../../../src/assets/images/pic9.jpg" width="250" height="120" @click="showModal()">  </div>
+                    <div > <img src="../../../../src/assets/images/pic1.jpg" width="250" height="120" @click="showModal()">  </div>   
+                 </div>
            </div>
            
-           <div class="description-product"> <h4>Description</h4></div>
+           <div class="description-product"> <h4>Description</h4>
+             <vue-editor v-model="description"></vue-editor>
+            <!-- <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>  -->
+            
+           </div>
            
     </div>
     <div>
@@ -44,18 +62,22 @@
         <button type="submit" class="btn btn-success" @click="showForm()">Add</button>
         <button type="button" class="btn btn-info">Preview</button>
     </div>
-    <Modal  v-bind:isVisible="isVisible" v-bind:showModal="showModal"/>
+    <Modal   v-bind:isVisible="isVisible" v-bind:showModal="showModal" @selectedProduct="showImage($event)"/>
 </template>
 
 <script>
+import { VueEditor } from  "vue2-editor";
 import { ref} from 'vue'
 import Modal from './Modal.vue'
     export default {
         components : {
-            Modal
+            Modal, VueEditor
         },
         
         setup(){
+            const description=ref('')
+            const url=ref('')
+            const imgFile=ref('')
             const isVisible=ref(false)
             const formValues=ref({
                 title:'',
@@ -66,7 +88,7 @@ import Modal from './Modal.vue'
               
             })
            
-           return {formValues,isVisible}
+           return {formValues,isVisible,imgFile,url,description}
            
           
             
@@ -83,6 +105,13 @@ import Modal from './Modal.vue'
                showModal: function(){
                   
                    this.isVisible= !this.isVisible
+               },
+               showImage(imgFile){
+                   thisrl= "../../../../src/assets/images/" + imgFile 
+                   document.getElementById('myImage').src=this.url;
+                 
+                   console.log(imgFile)
+                   console.log(this.url)
                }
           }
           
@@ -136,14 +165,43 @@ import Modal from './Modal.vue'
 .add-product .image-product {
     flex: 1;
     margin-left: 30px;
+    background: aqua;
 }
+
+.add-product .image-product .images{
+    display: flex;
+    flex-wrap: wrap ;
+    flex-direction: row;
+    margin:20px;
+    justify-content:  space-around;
+    
+    
+}
+.add-product .image-product .images img{
+    border-radius: 8px;
+}
+
 .add-product .description-product {
     width: 100%;
     height: 600px;
     flex: 2 2 auto;
     margin-top: 30px;
+    background: aquamarine;
 }
 
+.add-product .image-product .image-download{
+    flex: 1;
+    height: 200px;
+    background: #FFFFFF;  
+    margin: 20px 20px 20px 20px;
+}
+
+.add-product .image-product .images{
+    flex: 1;
+    height: 300px;
+    /* background: rgb(0, 255, 85); */
+    margin: 20px 0 20px 20px;
+}
 
 /* .container  {
     width: 1200px;
