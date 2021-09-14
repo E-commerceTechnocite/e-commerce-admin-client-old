@@ -33,12 +33,10 @@
                 </div>
             </form>
             <div class="image-product"> 
-             
                 <DragAndDrop/>
-
-               <img :src="files" :alt="files">
-               <div>{{files}}</div>
-               
+                <CarouselImage/>
+               <!-- <img :src="files" :alt="files">
+               <div>{{files}}</div> -->
             </div>
             <div class="description-product"> 
             <h4>Description</h4>
@@ -56,10 +54,14 @@
 
 <script>
 import { ref} from 'vue'
+import DragAndDropTest from '../../../components/CrudProduct/DragAndDropTest.vue'
 import DragAndDrop from '../../../components/CrudProduct/DragAndDrop.vue'
+import CarouselImage from '../../../components/CrudProduct/CarouselImage.vue'
 export default {
     components: {
-        DragAndDrop
+        DragAndDropTest,
+        DragAndDrop,
+        CarouselImage
     },
     setup(){
         const files = ref([])
@@ -125,21 +127,6 @@ export default {
     margin: 30px 60px 200px 0;
     border-radius: 5px;
 }
-.add-product .drop-active {
-     background: black;
-    width: 100%;
-    height: 50%;
-}
-.add-product .file-upload {
-    background: white;
-    width: 100%;
-    height: 50%;
-}
-.add-product .drag {
-    background: red;
-    width: 100px;
-    height: 100%;
-}
 .add-product form, .add-product .image-product {
     height: 600px;
 } 
@@ -177,6 +164,9 @@ export default {
     flex: 1;
     margin-left: 30px;
     background: aqua;
+}
+.add-product .image-product .carousel {
+    margin-top: 30px;
 }
 
 .add-product .image-product .images{

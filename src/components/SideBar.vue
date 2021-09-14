@@ -21,9 +21,9 @@
                     <!-- <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
                     <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
                     <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
-                    <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li> -->
+                    <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
 
-                    <!-- <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
+                    <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
                     <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
                     <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li>
                     <li><a href="#"><span><i class="fas fa-dolly"></i></span>Shipping</a></li> -->

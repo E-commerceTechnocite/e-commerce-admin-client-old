@@ -1,96 +1,127 @@
 <template>
-  <div class="example-drag">
-    <div class="upload">
-      <ul v-if="files.length">
-        <li v-for="file in files" :key="file.id">
-          <span>{{file.name}}</span> -
-          <!-- <span>{{$formatSize(file.size)}}</span> - -->
-          <span v-if="file.error">{{file.error}}</span>
-          <span v-else-if="file.success">success</span>
-          <span v-else-if="file.active">active</span>
-          <span v-else></span>
-        </li>
-      </ul>
-      <ul v-else>
-        <td colspan="7">
-          <div class="text-center p-5">
-            <h4>Drop files anywhere to upload</h4>
-            <label for="file" class="btn btn-lg btn-primary">Select Files</label>
-          </div>
-        </td>
-      </ul>
+  <div class="drag-and-drop">
+        <div>
 
-      <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
-    		<h3>Drop files to upload</h3>
-      </div>
+            <file-upload
+                class="file-upload"
+                :multiple="true"
+                :drop="true"
+                :drop-directory="true"
+                v-model="files"
+                @input-filter="inputFilter"
+                ref="upload">
+                    <i class="fas fa-file-image"></i>
+                    Drop or click to upload images
+            </file-upload>
 
-      <div class="example-btn">
-        <file-upload
-          class="btn btn-primary"
-          post-action="/upload/post"
-          :multiple="true"
-          :drop="true"
-          :drop-directory="true"
-          v-model="files"
-          ref="upload">
-          <i class="fa fa-plus"></i>
-          Select files
-        </file-upload>
-        <button type="button" class="btn btn-success" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">
-          <i class="fa fa-arrow-up" aria-hidden="true"></i>
-          Start Upload
-        </button>
-        <button type="button" class="btn btn-danger"  v-else @click.prevent="$refs.upload.active = false">
-          <i class="fa fa-stop" aria-hidden="true"></i>
-          Stop Upload
-        </button>
-      </div>
+            <div v-show="$refs.upload && $refs.upload.dropActive " class="drop-active">
+                <h3>Drop images</h3>
+            </div>
+
+        </div>
+
+        <ul v-if="files.length">
+            <li v-for="file in files" :key="file.id">
+                <span>{{file.name}}</span> -
+                <!-- <img :src="file.blob" :alt="file.name"> -->
+                <!-- <span>{{$formatSize(file.size)}}</span> - -->
+                <span v-if="file.error">{{file.error}}</span>
+                <span v-else-if="file.success">success</span>
+                <span v-else-if="file.active">active</span>
+                <span v-else></span>
+            </li>
+        </ul>
     </div>
-  </div>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
 import FileUpload from 'vue-upload-component'
+import { onUpdated } from '@vue/runtime-core'
 export default {
-  components: {
-    FileUpload,
-  },
-  data() {
-    return {
-      files: [],
+    components: { FileUpload },
+    setup() {
+        const files = ref([])
+        const inputFilter= function(newFile, oldFile, prevent) {
+        if (newFile && !oldFile) {
+            // Add file
+
+            // Filter non-image file
+            // Will not be added to files
+            if (!/\.(jpeg|jpe|jpg|gif|png|webp)$/i.test(newFile.name)) {
+            return prevent()
+            }
+
+            // Create the 'blob' field for thumbnail preview
+            newFile.blob = ''
+            let URL = window.URL || window.webkitURL
+            if (URL && URL.createObjectURL) {
+                newFile.blob = URL.createObjectURL(newFile.file)
+            }
+        }
+
+        if (newFile && oldFile) {
+            // Update file
+
+            // Increase the version number
+            if (!newFile.version) {
+            newFile.version = 0
+            }
+            newFile.version++
+        }
+
+        if (!newFile && oldFile) {
+            // Remove file
+
+            // Refused to remove the file
+            // return prevent()
+        }
     }
-  }
+    onUpdated(() => console.log(files.value))
+    return {files, inputFilter}
+    },
+    
 }
 </script>
 
 <style>
-.example-drag label.btn {
-  margin-bottom: 0;
-  margin-right: 1rem;
+.drag-and-drop {
+    background: white;
+    height: 50%;
+    border: 2px #535353 dashed;
+
 }
-.example-drag .drop-active {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  position: fixed;
-  z-index: 9999;
-  opacity: .6;
-  text-align: center;
-  background: #000;
+.drag-and-drop .drop-active {
+    position: absolute;
+    z-index: 9999;
+    opacity: .1;
+    text-align: center;
+    background: #000;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
 }
-.example-drag .drop-active h3 {
-  margin: -.5em 0 0;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  font-size: 40px;
-  color: #fff;
-  padding: 0;
+.drag-and-drop div:first-child {
+    background: red;
+    height: 100%;
+    position: relative;
+}
+.drag-and-drop .file-upload {
+    /* background: red; */
+    background: white;
+    width: 100%;
+    height: 100%; 
+     display: flex;
+     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.drag-and-drop .file-upload i {
+    font-size: 50px;
+    margin-bottom: 20px;
 }
 </style>
-
