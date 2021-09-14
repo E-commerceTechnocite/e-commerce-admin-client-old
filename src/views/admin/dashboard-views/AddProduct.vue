@@ -52,7 +52,8 @@
            
            <div class="description-product"> <h4>Description</h4>
             
-            <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>  
+            <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+            <!-- <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>   -->
             
            </div>
            
@@ -65,53 +66,98 @@
     <Modal   v-bind:isVisible="isVisible" v-bind:showModal="showModal" @selectedProduct="showImage($event)"/>
 </template>
 
+
+
+
+
 <script>
+
+
 import { ref} from 'vue'
 import Modal from './Modal.vue'
-    export default {
-        
-        setup(){
-            const description=ref('')
-            const url=ref('')
-            const imgFile=ref('')
-            const isVisible=ref(false)
-            const formValues=ref({
-                title:'',
-                reference:'',
-                category:'',
-                tax:'',
-                price:'',
-              
-            })
-           
-           return {formValues,isVisible,imgFile,url,description}
-           
-          
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+
+//import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
+export default {
+    components:{
+        Modal ,           
+    },
+    
+    setup(){
+        const description=ref('')
+        const url=ref('')
+        const imgFile=ref('')
+        const isVisible=ref(false)
+        const formValues=ref({
+            title:'',
+            reference:'',
+            category:'',
+            tax:'',
+            price:'',
             
-            },//end setup
-           // this to test if i get info about product
-           methods :{
-               showForm ()  {
-                    console.log(this.formValues.title); 
-                    console.log(this.formValues.reference);
-                    console.log(this.formValues.category); 
-                    console.log(this.formValues.tax);
-                    console.log(this.formValues.price);
-               },
-               showModal: function(){
-                  
-                   this.isVisible= !this.isVisible
-               },
-               showImage(imgFile){
-                   thisrl= "../../../../src/assets/images/" + imgFile 
-                   document.getElementById('myImage').src=this.url;
-                 
-                   console.log(imgFile)
-                   console.log(this.url)
+        })
+        
+        
+        return {
+            formValues,
+            isVisible,
+            imgFile,
+            url,
+            description
+        }
+        
+    },
+        
+    data() {
+       return {
+            editor: ClassicEditor,
+            editorData: '<p></p>',
+            editorConfig: {
+               //The configuration of the editor.
+                 toolbar: {
+                   //items: [ 'Bold', 'Italic', 'link','NumberedList','BulletedList'],
+                  // items : [ 'bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList' ]
+                    
+                   
                }
-          }
-          
-    } ;//end export
+                           
+           },
+            
+       }
+    }, 
+    
+  /*   data() {
+    return {
+      content: "<h1>Some initial content</h1>"
+    };
+  }, */
+    
+
+    // this to test if i get info about product
+    methods :{
+        showForm ()  {
+            console.log(this.formValues.title); 
+            console.log(this.formValues.reference);
+            console.log(this.formValues.category); 
+            console.log(this.formValues.tax);
+            console.log(this.formValues.price);
+        },
+        showModal: function(){
+            
+            this.isVisible= !this.isVisible
+        },
+        showImage(imgFile){
+            thisrl= "../../../../src/assets/images/" + imgFile 
+            document.getElementById('myImage').src=this.url;
+            
+            console.log(imgFile)
+            console.log(this.url)
+        }
+    }
+}
+        
+    //end export
         
        
         
