@@ -32,31 +32,28 @@
                     <input type="text" class="form-control" id="price" v-model="formValues.price">
                 </div>
             </form>
+
             <div class="image-product"> 
                 <DragAndDrop/>
                 <CarouselImage/>
-               <!-- <img :src="files" :alt="files">
-               <div>{{files}}</div> -->
             </div>
+
             <div class="description-product"> 
             <h4>Description</h4>
-             <!-- <vue-editor v-model="description"></vue-editor> -->
-            <!-- <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>  -->
         </div>
     </div>
     <div>
-        <!-- {{formValues.title}} {{formValues.reference}}{{formValues.category}} {{formValues.tax}}{{formValues.price}}  -->
         <button type="submit" class="btn btn-success" @click="showForm()">Add</button>
         <button type="button" class="btn btn-info">Preview</button>
     </div>
-    <!-- <Modal   v-bind:isVisible="isVisible" v-bind:showModal="showModal" @selectedProduct="showImage($event)"/> -->
 </template>
 
 <script>
-import { ref} from 'vue'
+import { computed, ref} from 'vue'
 import DragAndDropTest from '../../../components/CrudProduct/DragAndDropTest.vue'
 import DragAndDrop from '../../../components/CrudProduct/DragAndDrop.vue'
 import CarouselImage from '../../../components/CrudProduct/CarouselImage.vue'
+import { useStore } from 'vuex'
 export default {
     components: {
         DragAndDropTest,
@@ -64,10 +61,10 @@ export default {
         CarouselImage
     },
     setup(){
-        const files = ref([])
+        const store = useStore()
+        const files = computed(() => store.getters['dashboard/GET_IMAGES'])
         const description=ref('')
         const url=ref('')
-        const imgFile=ref('')
         const isVisible=ref(false)
         const formValues=ref({
             title:'',
@@ -81,39 +78,14 @@ export default {
             files,
             formValues,
             isVisible,
-            imgFile,
             url,
             description
         }
         
         
         
-        },//end setup
-        // this to test if i get info about product
-        methods :{
-            showForm ()  {
-                console.log(this.formValues.title); 
-                console.log(this.formValues.reference);
-                console.log(this.formValues.category); 
-                console.log(this.formValues.tax);
-                console.log(this.formValues.price);
-            },
-            showModal: function(){
-                
-                this.isVisible= !this.isVisible
-            },
-            showImage(imgFile){
-                thisrl= "../../../../src/assets/images/" + imgFile 
-                document.getElementById('myImage').src=this.url;
-                
-                console.log(imgFile)
-                console.log(this.url)
-            }
         }
-} ;//end export
-        
-       
-        
+}        
 </script>
 
 <style>
@@ -162,8 +134,9 @@ export default {
 }
 .add-product .image-product {
     flex: 1;
+    max-width: 650px;
     margin-left: 30px;
-    background: aqua;
+    /* background: aqua; */
 }
 .add-product .image-product .carousel {
     margin-top: 30px;

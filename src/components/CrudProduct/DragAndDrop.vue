@@ -22,7 +22,7 @@
 
         <ul v-if="files.length">
             <li v-for="file in files" :key="file.id">
-                <span>{{file.name}}</span> -
+                <!-- <span>{{file}}</span> - -->
                 <!-- <img :src="file.blob" :alt="file.name"> -->
                 <!-- <span>{{$formatSize(file.size)}}</span> - -->
                 <span v-if="file.error">{{file.error}}</span>
@@ -37,10 +37,12 @@
 <script>
 import { ref } from '@vue/reactivity'
 import FileUpload from 'vue-upload-component'
-import { onUpdated } from '@vue/runtime-core'
+import { watchEffect } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 export default {
     components: { FileUpload },
     setup() {
+        const store = useStore()
         const files = ref([])
         const inputFilter= function(newFile, oldFile, prevent) {
         if (newFile && !oldFile) {
@@ -77,7 +79,7 @@ export default {
             // return prevent()
         }
     }
-    onUpdated(() => console.log(files.value))
+    watchEffect(() => store.dispatch( 'dashboard/PASS_IMAGE', files.value) )
     return {files, inputFilter}
     },
     

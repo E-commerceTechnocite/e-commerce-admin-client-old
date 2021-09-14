@@ -1,16 +1,23 @@
 export default ({
     namespaced: true,
     state: {
-        breadCrumbs: []
+        breadCrumbs: [],
+        images: []
     },
     getters: {
         GET_BREADCRUMBS: (state) => {
             return Object.values(state.breadCrumbs) 
+        },
+        GET_IMAGES: (state) => {
+            return state.images
         }
     },
     mutations: {
         SET_BREADCRUMBS: (state, path) => {
             state.breadCrumbs = path
+        },
+        SET_PRODUCT_IMAGES: (state, imagesFile) => {
+            state.images = imagesFile
         }
     },
     actions: {
@@ -23,7 +30,9 @@ export default ({
             treatedPath.shift()
             let result = Object.assign({}, treatedPath)
             if (!_.isEqual( state.breadCrumbs, result)) commit('SET_BREADCRUMBS', result)
-
+        },
+        PASS_IMAGE: ({commit}, imagesFile) => {
+            commit('SET_PRODUCT_IMAGES', imagesFile)
         }
     }
 })
