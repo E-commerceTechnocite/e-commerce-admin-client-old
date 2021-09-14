@@ -2,7 +2,8 @@ export default ({
     namespaced: true,
     state: {
         breadCrumbs: [],
-        images: []
+        images: [],
+        currentImage: []
     },
     getters: {
         GET_BREADCRUMBS: (state) => {
@@ -10,6 +11,9 @@ export default ({
         },
         GET_IMAGES: (state) => {
             return state.images
+        },
+        GET_CURRENT_IMAGE: (state) => {
+            return state.image
         }
     },
     mutations: {
@@ -18,6 +22,9 @@ export default ({
         },
         SET_PRODUCT_IMAGES: (state, imagesFile) => {
             state.images = imagesFile
+        },
+        SET_CURRENT_IMAGE: (state, imagesFile) => {
+            state.image = imagesFile
         }
     },
     actions: {
@@ -33,6 +40,9 @@ export default ({
         },
         PASS_IMAGE: ({commit}, imagesFile) => {
             commit('SET_PRODUCT_IMAGES', imagesFile)
+        },
+        PASS_CURRENT_IMAGE: ({commit}, imagesFile) => {
+            commit('SET_CURRENT_IMAGE', imagesFile)
         }
     }
 })

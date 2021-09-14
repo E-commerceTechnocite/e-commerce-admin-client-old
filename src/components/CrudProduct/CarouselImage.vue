@@ -4,20 +4,20 @@
             <slide v-for="(image, index) in files" :key="index">
                 <i class="fas fa-times" @click="deleteImage(files, index)"></i>
                 <div class="img-container">
-                    <img class="carousel__item" @click="handleClickImage" :src="image.blob" :alt="image.name" :title="image.name">
+                    <img class="carousel__item" @click="handleClickImage(image)" :src="image.blob" :alt="image.name" :title="image.name">
                 </div>
             </slide>
             <template #addons="{ slidesCount }">
             <navigation v-if="slidesCount > 3" />
             </template>
         </carousel>
-    <ModalImage v-if="true"/>
+        <ModalImage v-if="showImage" @close="closeModal"/>
     </div>
 </template>
 
 <script>
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { computed, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import ModalImage from '../CrudProduct/ModalImage.vue'
@@ -31,20 +31,27 @@ export default {
     ModalImage
   },
   setup() {
-      const store = useStore()
-      const files = computed(() => store.getters['dashboard/GET_IMAGES'])
-      const showImage = ref(false)
-      const deleteImage = (array, index) =>  {array.splice(index, 1)}
-      const handleClickImage = () => {
+    const store = useStore()
+    const files = computed(() => store.getters['dashboard/GET_IMAGES'])
+    const showImage = ref(false)
+    const currentImage = ref(null)
+    const deleteImage = (array, index) =>  {array.splice(index, 1)}
+    const handleClickImage = (file) => {
+        store.dispatch('dashboard/PASS_CURRENT_IMAGE', file)
+        showImage.value = true
+    }
+    const closeModal = () => {
+        showImage.value = false
+    }
 
-      }
-
-      return {
-          files,
-          showImage,
-          deleteImage,
-          handleClickImage
-      }
+    return {
+        files,
+        showImage,
+        currentImage,
+        deleteImage,
+        handleClickImage,
+        closeModal
+    }
   }
 };
 </script>
