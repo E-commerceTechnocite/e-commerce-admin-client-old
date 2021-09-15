@@ -42,3 +42,32 @@ input[type=button]:focus {
 .action:hover {
     background: #5a77e0;
 }
+.secondary-action {
+    background: #ffffff;
+    box-shadow: 0px 0px 5px #4262D6;
+    border-radius: 7px;
+    border: none;
+    color: #4262D6;
+    text-transform: uppercase;
+    padding: 8px 27px;
+    transition: 0.2s;
+}
+.secondary-action:hover {
+    background: #f7f8fd;
+    color: #5a77e0;
+}
+.delete-action {
+    background: #D74040;
+    padding: 5px 9px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 0px 0px 4px #D74040;
+    transition: 0.2s;
+}
+.delete-action i {
+    color: white;
+}
+.delete-action:hover {
+    background: #e64e4e;
+}

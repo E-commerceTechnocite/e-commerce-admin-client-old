@@ -65,36 +65,31 @@ export default {
     height: 225px;
     overflow: hidden;
     padding: 10px;
+    position: relative;
+}
+.carousel .carousel__slide::before {
+    content: '';
+    width: 200px;
+    height: 200px;
+    background: white;
+    position: absolute;
+    left:8px;
+    top: 10px;
+    z-index: -1;
 }
 
 .carousel .carousel__item {
     max-width: 200px;
     max-height: 200px;
+    background: white;
 }
 
 .carousel .carousel__slide i {
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
 }
-/* .carousel img {
-}
-.carousel .carousel__slide {
-    padding: 0 8px;
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-.carousel .carousel__item {
-    position: absolute;
-    background: lightcoral;
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-} */
 .carousel .carousel__next,
 .carousel .carousel__prev
  {
@@ -104,11 +99,4 @@ export default {
     z-index: 1;
     border: 5px solid rgb(238, 238, 238)
 }
-/* .carousel i {
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    position: absolute;
-    color: red;
-} */
 </style>

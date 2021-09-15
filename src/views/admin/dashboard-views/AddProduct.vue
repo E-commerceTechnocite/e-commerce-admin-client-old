@@ -34,7 +34,7 @@
             </form>
 
             <div class="image-product"> 
-                <DragAndDrop/>
+                <DragAndDrop :multiple="true" :edit="false"/>
                 <CarouselImage/>
             </div>
 
@@ -50,13 +50,11 @@
 
 <script>
 import { computed, ref} from 'vue'
-import DragAndDropTest from '../../../components/CrudProduct/DragAndDropTest.vue'
 import DragAndDrop from '../../../components/CrudProduct/DragAndDrop.vue'
 import CarouselImage from '../../../components/CrudProduct/CarouselImage.vue'
 import { useStore } from 'vuex'
 export default {
     components: {
-        DragAndDropTest,
         DragAndDrop,
         CarouselImage
     },
@@ -176,57 +174,4 @@ export default {
     /* background: rgb(0, 255, 85); */
     margin: 20px 0 20px 20px;
 }
-
-/* .container  {
-    width: 1200px;
-    height: 750px;
-    margin : 50px auto;
-    padding : 10px;
-    display:flex;
-    flex-wrap:wrap;
-    align-content: stretch;
-    justify-content: space-around;
-    background-color: #EEE;
-}
-.div1 {
-    
-    width: 450px;
-    height: 300px;
-    padding : 10px;
-   
-}
-
-.div2 {
-   
-    width: 650px;
-    height: 300px;
-    padding : 10px;
-    background-color: white;
-}
-
-.div3 {
-    
-    width: 1000px;
-    height: 200px;
-    padding : 10px;
-    background-color: white;
-    
-}
-
-/.div4 {
-   
-    width: 650px;
-    height: 100px;
-    padding : 10px;
-    background-color: rgb(233, 227, 227);
-    flex-direction: row;
-    align-content: flex-end;
-}
- 
-
-
-button {
-    margin: 5px;
-} */
-
 </style>

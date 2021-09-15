@@ -4,10 +4,10 @@
 
             <file-upload
                 class="file-upload"
-                :multiple="true"
+                :multiple="isMultiple"
                 :drop="true"
                 :drop-directory="true"
-                v-model="files"
+                v-model="fileVal"
                 @input-filter="inputFilter"
                 ref="upload">
                     <i class="fas fa-file-image"></i>
@@ -35,15 +35,23 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import FileUpload from 'vue-upload-component'
 import { watchEffect } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 export default {
     components: { FileUpload },
-    setup() {
+    props: [
+        'multiple',
+        'edit'
+    ],
+    setup(props) {
         const store = useStore()
         const files = ref([])
+        const singleFIleImage = ref()
+        const fileVal = computed(() => isEdit ? singleFIleImage.value : files.value)
+        const isMultiple = ref(props.multiple)
+        const isEdit = ref(props.edit)
         const inputFilter= function(newFile, oldFile, prevent) {
         if (newFile && !oldFile) {
             // Add file
@@ -79,8 +87,8 @@ export default {
             // return prevent()
         }
     }
-    watchEffect(() => store.dispatch( 'dashboard/PASS_IMAGE', files.value) )
-    return {files, inputFilter}
+    if (!isEdit) watchEffect(() => store.dispatch( 'dashboard/PASS_IMAGE', files.value) )
+    return {fileVal, isMultiple, isEdit, inputFilter}
     },
     
 }
