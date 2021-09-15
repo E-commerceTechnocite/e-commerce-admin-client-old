@@ -3,18 +3,36 @@
         <div>
 
             <file-upload
+                v-if="!isEdit"
                 class="file-upload"
                 :multiple="isMultiple"
                 :drop="true"
                 :drop-directory="true"
-                v-model="fileVal"
+                v-model="files"
+                input-id="files"
                 @input-filter="inputFilter"
                 ref="upload">
                     <i class="fas fa-file-image"></i>
                     Drop or click to upload images
+                    not edit
             </file-upload>
 
-            <div v-show="$refs.upload && $refs.upload.dropActive " class="drop-active">
+            <file-upload
+                v-if="isEdit"
+                class="file-upload"
+                :multiple="isMultiple"
+                :drop="true"
+                :drop-directory="true"
+                v-model="singleFileImage"
+                input-id="singleFileImage"
+                @input-filter="inputFilter"
+                ref="upload">
+                    <i class="fas fa-file-image"></i>
+                    Drop or click to upload images
+                    edit
+            </file-upload>
+
+            <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
                 <h3>Drop images</h3>
             </div>
 
@@ -35,21 +53,21 @@
 </template>
 
 <script>
-import { computed, ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity'
 import FileUpload from 'vue-upload-component'
-import { watchEffect } from '@vue/runtime-core'
+import { watch, watchEffect } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 export default {
     components: { FileUpload },
     props: [
         'multiple',
-        'edit'
+        'edit',
+        'index'
     ],
-    setup(props) {
+    setup(props, {emit}) {
         const store = useStore()
         const files = ref([])
-        const singleFIleImage = ref()
-        const fileVal = computed(() => isEdit ? singleFIleImage.value : files.value)
+        const singleFileImage = ref()
         const isMultiple = ref(props.multiple)
         const isEdit = ref(props.edit)
         const inputFilter= function(newFile, oldFile, prevent) {
@@ -87,14 +105,27 @@ export default {
             // return prevent()
         }
     }
-    if (!isEdit) watchEffect(() => store.dispatch( 'dashboard/PASS_IMAGE', files.value) )
-    return {fileVal, isMultiple, isEdit, inputFilter}
+    watch(singleFileImage, (newVal, oldVal) => {
+        emit('newImage', newVal)
+        /* console.log('ouga')
+        console.log(newVal)
+        console.log('bouga') */
+    })
+    watchEffect(() => {
+        if (isEdit.value) {
+            // emit('newImage', singleFileImage.value)
+        } else {
+            store.dispatch( 'dashboard/PASS_IMAGE', files.value)
+            console.log(files.value)
+        }
+    })
+    return {singleFileImage, files, isMultiple, isEdit, inputFilter}
     },
     
 }
 </script>
 
-<style>
+<style scoped>
 .drag-and-drop {
     background: white;
     height: 50%;
@@ -103,7 +134,7 @@ export default {
 }
 .drag-and-drop .drop-active {
     position: absolute;
-    z-index: 9999;
+    z-index: 2;
     opacity: .1;
     text-align: center;
     background: #000;

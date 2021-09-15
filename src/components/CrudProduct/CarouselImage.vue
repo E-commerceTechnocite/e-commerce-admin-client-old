@@ -4,7 +4,7 @@
             <slide v-for="(image, index) in files" :key="index">
                 <i class="fas fa-times" @click="deleteImage(files, index)"></i>
                 <div class="img-container">
-                    <img class="carousel__item" @click="handleClickImage(image)" :src="image.blob" :alt="image.name" :title="image.name">
+                    <img class="carousel__item" @click="handleClickImage(image, index)" :src="image.blob" :alt="image.name" :title="image.name">
                 </div>
             </slide>
             <template #addons="{ slidesCount }">
@@ -12,6 +12,7 @@
             </template>
         </carousel>
         <ModalImage v-if="showImage" @close="closeModal"/>
+        <button @click="handleClick">test</button>
     </div>
 </template>
 
@@ -36,8 +37,8 @@ export default {
     const showImage = ref(false)
     const currentImage = ref(null)
     const deleteImage = (array, index) =>  {array.splice(index, 1)}
-    const handleClickImage = (file) => {
-        store.dispatch('dashboard/PASS_CURRENT_IMAGE', file)
+    const handleClickImage = (file, index) => {
+        store.dispatch('dashboard/PASS_CURRENT_IMAGE', {file, index})
         showImage.value = true
     }
     const closeModal = () => {

@@ -2,15 +2,16 @@
     <div class="modal-image">
         <div class="modal-mask" @click.self="$emit('close')">
             <div class="modal-body">
-                <!-- <DragAndDrop/> -->
+                <DragAndDrop :multiple="false" :edit="true" @newImage="updateImage"/>
                 <div class="modal-content">
                     <div class="current-image">
-                        <img :src="file.blob" :alt="file.name" :title="file.name">   
+                        <img :src="currentFile.blob" :alt="currentFile.name" :title="currentFile.name">   
                     </div>
                     <div class="modal-actions">
                         <div class="image-title">
-                                <label for="title">Title</label>
-                                <input type="text" id="title" name="title" v-model="currentName">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" v-model="currentFile.name">
+                            <!-- {{currentFile}} -->
                         </div>
                         <div class="modal-buttons">
                             <button class="delete-action">
@@ -20,7 +21,7 @@
                                 <button class="secondary-action" @click="$emit('close')">
                                     CLOSE
                                 </button>
-                                <button class="action">
+                                <button class="action" @click="submitChange">
                                     ADD
                                 </button>
                             </div>
@@ -36,10 +37,10 @@
 </template>
 
 <script>
-import { computed, ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity'
 import { useStore } from 'vuex'
 import DragAndDrop from './DragAndDrop.vue'
-import { onMounted, onUnmounted, onUpdated } from '@vue/runtime-core'
+import { onMounted, onUnmounted } from '@vue/runtime-core'
 
 export default {
     components: {
@@ -47,14 +48,25 @@ export default {
     },
     setup() {
         const store = useStore()
-        const file = computed(() => store.getters['dashboard/GET_CURRENT_IMAGE'])
-        const currentName = ref(file.value.name)
+        const file = ref(store.getters['dashboard/GET_CURRENT_IMAGE'])
+        const newFile = ref()
+        const newFileIndex = ref(store.getters['dashboard/GET_CURRENT_IMAGE_INDEX'])
+        const currentFile = ref(file.value)
+        const updateImage = (newImage) => {
+            currentFile.value = newImage[0]
+            store.dispatch( 'dashboard/PASS_CURRENT_IMAGE', {file: newImage})
+        }
+        const submitChange = () => {
+            console.log(newFileIndex.value)
+        }
         onMounted(() => document.body.style.overflow = 'hidden')
         onUnmounted(() => document.body.style.overflow = 'auto')
-        console.log(file.value)
         return {
             file,
-            currentName
+            currentFile,
+            newFile,
+            submitChange,
+            updateImage
         }
     }
 }
