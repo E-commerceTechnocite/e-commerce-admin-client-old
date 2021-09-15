@@ -1,11 +1,11 @@
 <template>
 <div class="product-information">
     <div class="productListing" v-for="product in data.slice(beginNumberOfListRows,endNumberOfListRows)" :key="product">
-        <div class="titleProduct item" >{{ product.titleProduct }}</div>
-        <div class="ref item">{{ product.refr }}</div>
-        <div class="category item">{{ product.category }}</div>
-        <div class="price item">{{ product.price }}</div>
-        <div class="taxPrice item">{{ product.taxPrice }}</div>
+        <div class="titleProduct item" >{{ product.title }}</div>
+        <div class="ref item">{{ product.reference }}</div>
+        <div class="category item">{{ product.category.label }}</div>
+        <div class="price item">{{ product.price }}€</div>
+        <div class="taxPrice item">TAXE</div>
         <button class="editButton">EDIT</button>
         <button class="trashButton"><i class="fas fa-trash"></i></button>
     </div>

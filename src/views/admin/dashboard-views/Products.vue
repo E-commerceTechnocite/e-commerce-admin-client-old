@@ -1,27 +1,32 @@
 <template>
   <div class="products">
     <div class="productButtonContainer">
-        <button class="action">PRODUCT+</button>
+      <button class="action">PRODUCT+</button>
       <div class="search-bar">
           <i class="fas fa-search"></i>
           <input type="text" placeholder="search">
       </div>
     </div>
-
     <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
-  </div>
+    <div> 
+      <Pagination />
+    </div>
+  </div>   
 </template>
 
 <script>
 import Loading from '../../../components/Loading.vue'
 import ProductInformation from '@/components/ProductInformation.vue'
+import Pagination from '@/components/Pagination.vue'
 import { useStore } from 'vuex'
 import { onMounted } from '@vue/runtime-core'
+/*import Pagination from '../../../components/Pagination.vue'*/
 
 export default {
   components: { 
     Loading,
-    ProductInformation 
+    ProductInformation,
+    Pagination,
     },
     setup() {
         const store = useStore()

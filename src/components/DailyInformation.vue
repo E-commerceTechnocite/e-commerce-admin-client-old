@@ -75,7 +75,7 @@ export default ({
     font-family: Roboto, Arial, Helvetica, sans-serif;
     margin: 0px 15px 0px 15px;
     padding: 15px;
-    height: 75px;
+    height: 60px;
     max-width: 375px;
     flex-grow: 1;
     display: flex;
