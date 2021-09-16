@@ -76,10 +76,11 @@
 import { ref} from 'vue'
 import Modal from './Modal.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import UploadAdapter from '../../../plugins/UploadAdapter' 
 
-//import ClassicEditor from '../../../../src/assets/ckeditor'
-//import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert'
- //import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
+
+//import UploadAdapter from './../plugins/UploadAdapter';   
 //import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 export default {
     components:{
@@ -116,11 +117,12 @@ export default {
             editor: ClassicEditor,
             editorData: '<p></p>',
             editorConfig: {
-                  //plugins: [ Base64UploadAdapter], 
-                  //plugins: [ImageInsert ],
+                  extraPlugins: [this.uploader],
                //The configuration of the editor.
                  toolbar: {
                  },
+
+                 
                 // ['bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList'  ]
                  
                  /* {   
@@ -150,6 +152,13 @@ export default {
 
       // this to test if i get info about product
     methods :{
+
+        uploader(editor)
+            {
+                 editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+                     return new UploadAdapter( loader );
+                 };
+            },
         showForm ()  {
             console.log(this.formValues.title); 
             console.log(this.formValues.reference);
