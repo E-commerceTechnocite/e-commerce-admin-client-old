@@ -97,7 +97,8 @@ export default {
     margin: 30px 60px 200px 0;
     border-radius: 5px;
 }
-.add-product form, .add-product .image-product {
+.add-product form, 
+.add-product .image-product {
     height: 600px;
 } 
 .add-product .general-info {
@@ -117,7 +118,8 @@ export default {
     align-self: flex-start;
 }
 
-.add-product .general-info input, .add-product .general-info select {
+.add-product .general-info input, 
+.add-product .general-info select {
     padding: 10px;
     border: 1px solid #D6D6D6;
 } 

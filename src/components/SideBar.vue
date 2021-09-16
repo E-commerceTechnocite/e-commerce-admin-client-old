@@ -199,10 +199,12 @@ export default {
 .sidebar li:hover {
     background: #292929;
 }
-.sidebar li:hover::after, .sidebar li:hover::before {
+.sidebar li:hover::after, 
+.sidebar li:hover::before {
     background: #292929;
 }
-.sidebar .sidebar-active, .sidebar .sidebar-active::after {
+.sidebar .sidebar-active, 
+.sidebar .sidebar-active::after {
     background: #292929;
 }
 </style>
