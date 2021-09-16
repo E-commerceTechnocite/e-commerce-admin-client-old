@@ -14,11 +14,15 @@
 
 <script>
 import { ref, computed } from '@vue/reactivity'
+import { useStore } from 'vuex'
 
 export default ({
-    setup() {
-        let currentPage = ref(1)
-        let numberOfPages = 10
+    props: ['totalPages','currentPage'],
+    setup(props) {
+        const store = useStore()
+        let currentPage = ref(props.currentPage)
+        const numberOfPages = props.totalPages
+
         const paginatedData = computed(() => {
           let range = []
           let startPage = currentPage.value - 2
@@ -34,23 +38,32 @@ export default ({
           }
           return range
         })
-        let onClickPage = (page) => {
-            currentPage.value = page  
+
+        const onClickPage = (page) => {
+          currentPage.value = page
+          onPageChanged(page)  
         }
-        let onClickNextPage = () => {
+        const onClickNextPage = () => {
           if(currentPage.value < numberOfPages) currentPage.value++
+          onPageChanged(currentPage.value)
         }
-        let onClickPreviousPage = () => {
+        const onClickPreviousPage = () => {
           if(currentPage.value > 1) currentPage.value--
+          onPageChanged(currentPage.value)
         }
-        let onClickFirstPage = () => {
+        const onClickFirstPage = () => {
           currentPage.value = 1
+          onPageChanged(currentPage.value)
         }
-        let onClickLastPage = () => {
+        const onClickLastPage = () => {
           currentPage.value = numberOfPages
+          onPageChanged(currentPage.value)
         }
         const isPageActive = (page) => {
           return currentPage.value === page
+        }
+        const onPageChanged = (page) => {
+          store.dispatch('products/FETCH_PRODUCTS',page)
         }
         return {
           currentPage,

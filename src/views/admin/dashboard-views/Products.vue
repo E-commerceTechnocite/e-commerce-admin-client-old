@@ -7,9 +7,9 @@
           <input type="text" placeholder="search">
       </div>
     </div>
-    <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
+      <ProductInformation />
     <div> 
-      <Pagination />
+      <Pagination :totalPages="meta.maxPages" :currentPage="meta.currentPage"/>
     </div>
   </div>   
 </template>
@@ -20,7 +20,7 @@ import ProductInformation from '@/components/ProductInformation.vue'
 import Pagination from '@/components/Pagination.vue'
 import { useStore } from 'vuex'
 import { onMounted } from '@vue/runtime-core'
-/*import Pagination from '../../../components/Pagination.vue'*/
+import { computed } from 'vue'
 
 export default {
   components: { 
@@ -30,14 +30,12 @@ export default {
     },
     setup() {
         const store = useStore()
+        store.dispatch('products/FETCH_PRODUCTS')
+        const meta = computed(() => store.getters['products/META_'])
         onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        let beginNumberOfListRows = 0
-        let endNumberOfListRows = 10
         return {
-            beginNumberOfListRows,
-            endNumberOfListRows,
             store,
-             
+            meta       
         }
     }
 }

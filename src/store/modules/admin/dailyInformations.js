@@ -20,7 +20,7 @@ export default ({
                 headers: {"Content-Type": "application/json"}
             }) 
             const jsonData = await response.json()
-            console.log(jsonData)
+            //console.log(jsonData)
             if (jsonData !== null) commit('DAILY_INFORMATIONS_SET', {data: jsonData})
             } catch (err) {
                 console.log("ERREUR") 

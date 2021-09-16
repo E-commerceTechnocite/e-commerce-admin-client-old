@@ -4,9 +4,9 @@
         <GraphicInformation />
         <div class="productButtonContainer">
             <h4>Last products added</h4>
-            <button class="action">PRODUCT+</button>
+            <router-link :to="{name: 'AddProduct'}" class="action">PRODUCT+</router-link>
         </div>
-        <ProductInformation :beginNumberOfListRows="beginNumberOfListRows" :endNumberOfListRows="endNumberOfListRows" />
+        <ProductInformation :limit="limit" />
     </div>
 </template>
 
@@ -26,11 +26,9 @@ export default {
     setup() {
         const store = useStore()
         onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        let beginNumberOfListRows = 0
-        let endNumberOfListRows = 3
+        const limit = 3
         return {
-            beginNumberOfListRows,
-            endNumberOfListRows,
+            limit,
             store 
         }
     }

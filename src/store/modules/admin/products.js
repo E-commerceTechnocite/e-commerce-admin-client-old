@@ -21,15 +21,21 @@ export default ({
         }
     },
     actions: {
-        /*JE CHANGE DES CHOSES*/
-        /*oui*/
-        FETCH_PRODUCTS: async({commit}) => {
+        FETCH_PRODUCTS: async({commit}, id=1) => {
+            if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') return 
+            let sessionToken = JSON.parse(sessionStorage.getItem('token'))
             try {
-                let response = await fetch ('http://localhost:3000/v1/product?limit=10&page=1/data', {
-                headers: {"Content-Type": "application/json"}
+                let response = await fetch ('http://localhost:3000/v1/product?limit=10&page=' + id, {
+                headers: {'Authorization': `Bearer ${sessionToken}`}
             }) 
             const jsonData = await response.json()
-            if (jsonData !== null) commit('PRODUCTS_SET', {data: jsonData})
+            console.log("prodprod" + jsonData.data)
+            console.log(jsonData.meta)
+            //console.log("tosseomiel")
+            if (jsonData !== null) {
+              commit('PRODUCTS_SET', {data: jsonData.data})
+              commit('META_SET', {data: jsonData.meta})
+            }
             } catch (err) {
                 return err
             }

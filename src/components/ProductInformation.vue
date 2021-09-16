@@ -1,6 +1,6 @@
 <template>
 <div class="product-information">
-    <!-- <div class="productListing" v-for="product in data.slice(beginNumberOfListRows,endNumberOfListRows)" :key="product">
+    <div class="productListing" v-for="product in data.slice(0,limit)" :key="product">
         <div class="titleProduct item" >{{ product.title }}</div>
         <div class="ref item">{{ product.reference }}</div>
         <div class="category item">{{ product.category.label }}</div>
@@ -8,7 +8,7 @@
         <div class="taxPrice item">TAXE</div>
         <button class="editButton">EDIT</button>
         <button class="trashButton"><i class="fas fa-trash"></i></button>
-    </div> -->
+    </div>
 </div>
 </template>
 
@@ -17,14 +17,20 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default ({
-    props: ['beginNumberOfListRows','endNumberOfListRows'],
-    setup() {
-        /* const store = useStore()
+    props: ['limit'],
+    setup(props) {
+        const store = useStore()
         store.dispatch('products/FETCH_PRODUCTS') 
         const data = computed(() => store.getters['products/PRODUCTS_'])
+        const meta = computed(() => store.getters['products/META_'])
+        
+        const limit = props.limit
+        /* console.log("meta " + meta.limit)
+        if(limit === null) limit = meta.limit */
         return {
-            data
-        }   */
+            data,
+            limit,
+        }  
     }
 })
 </script>

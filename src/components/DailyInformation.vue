@@ -50,7 +50,7 @@ export default ({
         const store = useStore()
         store.dispatch('dailyInformations/FETCH_INFORMATIONS') 
         const data = computed(() => store.getters['dailyInformations/DAILY_INFORMATIONS'])
-        console.log(data)
+        //console.log(data)
         return {
             data
         }  

@@ -45,9 +45,9 @@ export default ({
             try {
                 let response = await fetch("http://localhost:3000/v1/o-auth/login", requestOptions) 
                 if (!response.ok) router.push({name: 'LoginAdmin'})
-                console.log(response)
+                //console.log(response)
                 const data = await response.json()
-                console.log(data)
+                //console.log(data)
                 if (data !== null) commit('AUTH_SET_USER', {userData: data})
             } catch (err) {
                 return err
