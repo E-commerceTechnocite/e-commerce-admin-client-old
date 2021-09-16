@@ -109,14 +109,18 @@ export default {
         width: 60%;
         margin-bottom: 30px;
     }
-    .login-admin .email, .login-admin .password, .login-admin .checkbox {
+    .login-admin .email, 
+    .login-admin .password, 
+    .login-admin .checkbox {
         display: flex;
         align-items: flex-start;
     }
-    .login-admin .email, .login-admin .password {
+    .login-admin .email, 
+    .login-admin .password {
         flex-direction: column;
     }
-    .login-admin .email label, .login-admin .password label {
+    .login-admin .email label, 
+    .login-admin .password label {
         margin: 50px 0 15px 0;
     }
     .login-admin [type=email], [type=password] {

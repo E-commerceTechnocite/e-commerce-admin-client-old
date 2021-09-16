@@ -32,38 +32,21 @@
                     <input type="text" class="form-control" id="price" v-model="formValues.price">
                 </div>
             </form>
-           <div class="image-product"> <h4>Image Product</h4>
-            
-                 <div class="image-download"  > 
-                     
-                   <img alt="Select image" src="" id="myImage" height="120" width="250">
-                 </div>
-                 <div class="images"> 
-                    <div > <img src="../../../../src/assets/images/pic2.jpg" width="250" height="120"  @click="showModal()">  </div>
-                    <div > <img src="../../../../src/assets/images/pic3.jpg" width="250" height="120" @click="showModal()">  </div>
-                    <div > <img src="../../../../src/assets/images/pic5.jpg" width="250" height="120" @click="showModal()">  </div>
-                    <div > <img src="../../../../src/assets/images/pic6.jpg" width="250" height="120" @click="showModal()">  </div> 
-                    <div > <img src="../../../../src/assets/images/pic7.jpg" width="250" height="120" @click="showModal()">  </div>
-                    <div > <img src="../../../../src/assets/images/pic8.jpg" width="250" height="120" @click="showModal()">  </div>
-                    <div > <img src="../../../../src/assets/images/pic9.jpg" width="250" height="120" @click="showModal()">  </div>
-                    <div > <img src="../../../../src/assets/images/pic1.jpg" width="250" height="120" @click="showModal()">  </div>   
-                 </div>
-           </div>
-           
-           <div class="description-product"> <h4>Description</h4>
-            
-            <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-            <!-- <textarea  id="description" v-model="description" placeholder="Product descrption"> </textarea>   -->
-            
-           </div>
-           
+
+            <div class="image-product"> 
+                <DragAndDrop :multiple="true" :edit="false"/>
+                <CarouselImage/>
+            </div>
+
+            <div class="description-product"> 
+                <h4>Description</h4>
+                <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+            </div>
     </div>
     <div>
-        <!-- {{formValues.title}} {{formValues.reference}}{{formValues.category}} {{formValues.tax}}{{formValues.price}}  -->
         <button type="submit" class="btn btn-success" @click="showForm()">Add</button>
         <button type="button" class="btn btn-info">Preview</button>
     </div>
-    <Modal   v-bind:isVisible="isVisible" v-bind:showModal="showModal" @selectedProduct="showImage($event)"/>
 </template>
 
 
@@ -71,26 +54,24 @@
 
 
 <script>
+import { computed, ref} from 'vue'
+import DragAndDrop from '../../../components/CrudProduct/DragAndDrop.vue'
+import CarouselImage from '../../../components/CrudProduct/CarouselImage.vue'
 
-
-import { ref} from 'vue'
-import Modal from './Modal.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import UploadAdapter from '../../../plugins/UploadAdapter' 
 
-
-
-//import UploadAdapter from './../plugins/UploadAdapter';   
-//import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+import { useStore } from 'vuex'
 export default {
-    components:{
-        Modal ,           
+    components: {
+        DragAndDrop,
+        CarouselImage
     },
-    
     setup(){
+        const store = useStore()
+        const files = ref(store.getters['dashboard/GET_IMAGES'])
         const description=ref('')
         const url=ref('')
-        const imgFile=ref('')
         const isVisible=ref(false)
         const formValues=ref({
             title:'',
@@ -105,7 +86,6 @@ export default {
         return {
             formValues,
             isVisible,
-            imgFile,
             url,
             description
         }
@@ -117,7 +97,7 @@ export default {
             editor: ClassicEditor,
             editorData: '<p></p>',
             editorConfig: {
-                  extraPlugins: [this.uploader],
+                //   extraPlugins: [this.uploader],
                //The configuration of the editor.
                  toolbar: {
                  },
@@ -165,25 +145,11 @@ export default {
             console.log(this.formValues.category); 
             console.log(this.formValues.tax);
             console.log(this.formValues.price);
-        },
-        showModal: function(){
-            
-            this.isVisible= !this.isVisible
-        },
-        showImage(imgFile){
-            thisrl= "../../../../src/assets/images/" + imgFile 
-            document.getElementById('myImage').src=this.url;
-            
-            console.log(imgFile)
-            console.log(this.url)
         }
     }
 }
         
-    
-        
-       
-        
+          
 </script>
 
 <style>
@@ -193,19 +159,22 @@ export default {
     flex-wrap: wrap;
     min-height: 800px;
     /* align-items: flex-start; */
+    max-width: 1200px;
     margin: 30px 60px 200px 0;
     border-radius: 5px;
 }
-.add-product form, .add-product .image-product {
+.add-product form, 
+.add-product .image-product {
     height: 600px;
 } 
 .add-product .general-info {
     display: flex;
     flex-direction: column;
     padding: 30px;
+    border-radius: 5px;
     flex: 0 0 455px;
     background: #FFFFFF;
-    box-shadow: 4px 4px 4px rgba(109, 151, 234, 0.25);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 }
 .add-product .form-group {
     display: flex;
@@ -215,7 +184,8 @@ export default {
     align-self: flex-start;
 }
 
-.add-product .general-info input, .add-product .general-info select {
+.add-product .general-info input, 
+.add-product .general-info select {
     padding: 10px;
     border: 1px solid #D6D6D6;
 } 
@@ -230,8 +200,12 @@ export default {
 }
 .add-product .image-product {
     flex: 1;
+    max-width: 650px;
     margin-left: 30px;
-    background: aqua;
+    /* background: aqua; */
+}
+.add-product .image-product .carousel {
+    margin-top: 30px;
 }
 
 .add-product .image-product .images{
@@ -268,57 +242,4 @@ export default {
     /* background: rgb(0, 255, 85); */
     margin: 20px 0 20px 20px;
 }
-
-/* .container  {
-    width: 1200px;
-    height: 750px;
-    margin : 50px auto;
-    padding : 10px;
-    display:flex;
-    flex-wrap:wrap;
-    align-content: stretch;
-    justify-content: space-around;
-    background-color: #EEE;
-}
-.div1 {
-    
-    width: 450px;
-    height: 300px;
-    padding : 10px;
-   
-}
-
-.div2 {
-   
-    width: 650px;
-    height: 300px;
-    padding : 10px;
-    background-color: white;
-}
-
-.div3 {
-    
-    width: 1000px;
-    height: 200px;
-    padding : 10px;
-    background-color: white;
-    
-}
-
-/.div4 {
-   
-    width: 650px;
-    height: 100px;
-    padding : 10px;
-    background-color: rgb(233, 227, 227);
-    flex-direction: row;
-    align-content: flex-end;
-}
- 
-
-
-button {
-    margin: 5px;
-} */
-
 </style>

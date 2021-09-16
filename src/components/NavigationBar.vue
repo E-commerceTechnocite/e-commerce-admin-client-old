@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="user-info">
-      <div class="user" >
+      <div class="user">
         <div ref="dropMenu" v-show="userDropMenu">
           <router-link to="#">Profile</router-link>
           <router-link to="#" @click="logout">Logout</router-link>
