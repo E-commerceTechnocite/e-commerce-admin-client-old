@@ -77,8 +77,10 @@ import { ref} from 'vue'
 import Modal from './Modal.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
-//import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-
+//import ClassicEditor from '../../../../src/assets/ckeditor'
+//import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert'
+ //import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+//import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 export default {
     components:{
         Modal ,           
@@ -108,33 +110,45 @@ export default {
         }
         
     },
-        
+    
     data() {
        return {
             editor: ClassicEditor,
             editorData: '<p></p>',
             editorConfig: {
+                  //plugins: [ Base64UploadAdapter], 
+                  //plugins: [ImageInsert ],
                //The configuration of the editor.
                  toolbar: {
-                   //items: [ 'Bold', 'Italic', 'link','NumberedList','BulletedList'],
-                  // items : [ 'bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList' ]
-                    
-                   
-               }
-                           
-           },
-            
-       }
+                 },
+                // ['bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList'  ]
+                 
+                 /* {   
+                    items: [
+                        'heading', '|',
+                        'fontfamily', 'fontsize', '|',
+                        'alignment', '|',
+                        'fontColor', 'fontBackgroundColor', '|',
+                        'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+                        'link', '|',
+                        'outdent', 'indent', '|',
+                        'bulletedList', 'numberedList', 'todoList', '|',
+                        'code', 'codeBlock', '|',
+                        'insertTable', '|',
+                        'uploadImage', 'blockQuote', '|',
+                        'undo', 'redo'
+                    ],
+                        shouldNotGroupWhenFull: true
+                }   */
+            },
+        }
     }, 
-    
-  /*   data() {
-    return {
-      content: "<h1>Some initial content</h1>"
-    };
-  }, */
+
     
 
-    // this to test if i get info about product
+    
+
+      // this to test if i get info about product
     methods :{
         showForm ()  {
             console.log(this.formValues.title); 
@@ -157,7 +171,7 @@ export default {
     }
 }
         
-    //end export
+    
         
        
         
