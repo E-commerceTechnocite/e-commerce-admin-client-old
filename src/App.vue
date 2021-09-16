@@ -1,10 +1,19 @@
 <template>
   <router-view/>
+  
 </template>
+
+<script>
+
+export default {
+  name: 'Products',
+  
+}
+</script>
 
 <style>
 body {
-  background: #E5E5E5;
+  background: #EEEEEE;
 }
 #app {
   font-family: Roboto-Regular, Avenir, Helvetica, Arial, sans-serif;

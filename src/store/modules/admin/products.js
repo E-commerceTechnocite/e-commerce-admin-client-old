@@ -21,9 +21,11 @@ export default ({
         }
     },
     actions: {
+        /*JE CHANGE DES CHOSES*/
+        /*oui*/
         FETCH_PRODUCTS: async({commit}) => {
             try {
-                let response = await fetch ('http://localhost:4000/data', {
+                let response = await fetch ('http://localhost:3000/v1/product?limit=10&page=1/data', {
                 headers: {"Content-Type": "application/json"}
             }) 
             const jsonData = await response.json()
@@ -31,7 +33,7 @@ export default ({
             } catch (err) {
                 return err
             }
-            try {
+            /*try {
                 let response = await fetch ('http://localhost:4000/meta', {
                 headers: {"Content-Type": "application/json"}
             }) 
@@ -39,7 +41,7 @@ export default ({
             if (jsonData !== null) commit('META_SET', {data: jsonData})
             } catch (err) {
                 return err
-            }
+            }*/
         }
     }
   })

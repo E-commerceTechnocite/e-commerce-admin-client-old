@@ -44,7 +44,7 @@ export default {
         const router = useRouter()
         const email = ref('')
         const password = ref('')
-        const loaded = ref(false)
+        const loaded = ref(true)
         const token = computed(() => store.getters['auth/AUTH_USER_TOKEN'])
         const handleSubmit = async () => {
             if (loaded.value) {
@@ -60,6 +60,7 @@ export default {
             
         }
         onMounted(checkUser)
+
 
         return {
             email,

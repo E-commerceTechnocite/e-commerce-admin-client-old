@@ -1,7 +1,7 @@
 <template>
   <div class="products">
     <div class="productButtonContainer">
-      <button class="action">PRODUCT+</button>
+      <router-link :to="{name: 'AddProduct'}" class="action">PRODUCT+</router-link>
       <div class="search-bar">
           <i class="fas fa-search"></i>
           <input type="text" placeholder="search">
@@ -36,7 +36,8 @@ export default {
         return {
             beginNumberOfListRows,
             endNumberOfListRows,
-            store 
+            store,
+             
         }
     }
 }
