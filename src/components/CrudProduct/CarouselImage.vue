@@ -2,7 +2,7 @@
     <div v-if="files.length">
         <carousel class="carousel" :items-to-show="3">
             <slide v-for="(image, index) in files" :key="index">
-                <i class="fas fa-times" @click="deleteImage(files, index)"></i>
+                <i class="fas fa-times" @click.self="deleteImage(index)"></i>
                 <div class="img-container">
                     <img class="carousel__item" @click="handleClickImage(image, index)" :src="image.blob" :alt="image.name" :title="image.name">
                 </div>

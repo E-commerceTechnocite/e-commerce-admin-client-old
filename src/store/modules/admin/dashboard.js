@@ -62,6 +62,7 @@ export default ({
             commit('SET_CURRENT_IMAGE', file)
         },
         PASS_REMOVE_CURRENT_IMAGE: ({commit}, index) => {
+            if (typeof index === 'object') index = index.value
             commit('REMOVE_CURRENT_IMAGE', index)
         }
     }

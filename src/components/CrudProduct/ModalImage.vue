@@ -11,10 +11,9 @@
                         <div class="image-title">
                             <label for="title">Title</label>
                             <input type="text" id="title" name="title" v-model="currentFile.name">
-                            <!-- {{currentFile}} -->
                         </div>
                         <div class="modal-buttons">
-                            <button class="delete-action">
+                            <button class="delete-action" @click="handleRemove">
                                 <i class="fas fa-trash"></i>
                             </button>
                             <div>
@@ -57,8 +56,11 @@ export default {
             store.dispatch( 'dashboard/PASS_CURRENT_IMAGE', {file: newImage, index: null})
         }
         const submitChange = () => {
-            console.log(currentFile.value)
             store.dispatch( 'dashboard/PASS_UPDATE_CURRENT_IMAGE', {file: currentFile.value} )
+            emit('close')
+        }
+        const handleRemove = () => {
+            store.dispatch('dashboard/PASS_REMOVE_CURRENT_IMAGE', newFileIndex)
             emit('close')
         }
         onMounted(() => document.body.style.overflow = 'hidden')
@@ -68,7 +70,8 @@ export default {
             currentFile,
             newFile,
             submitChange,
-            updateImage
+            updateImage,
+            handleRemove
         }
     }
 }
@@ -82,6 +85,9 @@ export default {
     height: 720px;
     padding: 30px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 .modal-image .modal-content {
     display: flex;
