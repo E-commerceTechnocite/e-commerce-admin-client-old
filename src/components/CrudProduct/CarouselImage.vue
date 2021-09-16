@@ -12,14 +12,14 @@
             </template>
         </carousel>
         <ModalImage v-if="showImage" @close="closeModal"/>
-        <button @click="handleClick">test</button>
+        <!-- <button @click="handleClick">test</button> -->
     </div>
 </template>
 
 <script>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import { computed, ref } from '@vue/runtime-core'
+import { computed, ref, watch } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import ModalImage from '../CrudProduct/ModalImage.vue'
 
@@ -36,11 +36,12 @@ export default {
     const files = computed(() => store.getters['dashboard/GET_IMAGES'])
     const showImage = ref(false)
     const currentImage = ref(null)
-    const deleteImage = (array, index) =>  {array.splice(index, 1)}
+    const deleteImage = (index) =>  store.dispatch('dashboard/PASS_REMOVE_CURRENT_IMAGE', index)
     const handleClickImage = (file, index) => {
         store.dispatch('dashboard/PASS_CURRENT_IMAGE', {file, index})
         showImage.value = true
     }
+    
     const closeModal = () => {
         showImage.value = false
     }

@@ -66,10 +66,10 @@ export default {
     ],
     setup(props, {emit}) {
         const store = useStore()
-        const files = ref([])
-        const singleFileImage = ref()
         const isMultiple = ref(props.multiple)
         const isEdit = ref(props.edit)
+        const singleFileImage = ref()
+        const files = ref([])
         const inputFilter= function(newFile, oldFile, prevent) {
         if (newFile && !oldFile) {
             // Add file
@@ -79,7 +79,7 @@ export default {
             if (!/\.(jpeg|jpe|jpg|gif|png|webp)$/i.test(newFile.name)) {
             return prevent()
             }
-
+            
             // Create the 'blob' field for thumbnail preview
             newFile.blob = ''
             let URL = window.URL || window.webkitURL
@@ -107,19 +107,14 @@ export default {
     }
     watch(singleFileImage, (newVal, oldVal) => {
         emit('newImage', newVal)
-        /* console.log('ouga')
-        console.log(newVal)
-        console.log('bouga') */
     })
-    watchEffect(() => {
-        if (isEdit.value) {
-            // emit('newImage', singleFileImage.value)
-        } else {
-            store.dispatch( 'dashboard/PASS_IMAGE', files.value)
-            console.log(files.value)
-        }
-    })
-    return {singleFileImage, files, isMultiple, isEdit, inputFilter}
+    watchEffect(() => { if (!isEdit.value) store.dispatch( 'dashboard/PASS_IMAGE', files.value)})
+    return {
+        singleFileImage, 
+        files, 
+        isMultiple, 
+        isEdit, 
+        inputFilter}
     },
     
 }

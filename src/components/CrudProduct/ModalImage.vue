@@ -46,7 +46,7 @@ export default {
     components: {
         DragAndDrop
     },
-    setup() {
+    setup(props, {emit}) {
         const store = useStore()
         const file = ref(store.getters['dashboard/GET_CURRENT_IMAGE'])
         const newFile = ref()
@@ -54,10 +54,12 @@ export default {
         const currentFile = ref(file.value)
         const updateImage = (newImage) => {
             currentFile.value = newImage[0]
-            store.dispatch( 'dashboard/PASS_CURRENT_IMAGE', {file: newImage})
+            store.dispatch( 'dashboard/PASS_CURRENT_IMAGE', {file: newImage, index: null})
         }
         const submitChange = () => {
-            console.log(newFileIndex.value)
+            console.log(currentFile.value)
+            store.dispatch( 'dashboard/PASS_UPDATE_CURRENT_IMAGE', {file: currentFile.value} )
+            emit('close')
         }
         onMounted(() => document.body.style.overflow = 'hidden')
         onUnmounted(() => document.body.style.overflow = 'auto')

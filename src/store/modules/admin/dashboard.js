@@ -32,6 +32,12 @@ export default ({
         },
         SET_CURRENT_IMAGE_INDEX: (state, index) => {
             state.currentImageIndex = index
+        },
+        SET_NEW_CURRENT_IMAGE: (state, file) => {
+            state.images.splice(state.currentImageIndex, 1, Object.assign({}, file.file))
+        },
+        REMOVE_CURRENT_IMAGE: (state, index) => {
+            state.images.splice(index, 1)
         }
     },
     actions: {
@@ -48,12 +54,15 @@ export default ({
         PASS_IMAGE: ({commit}, imagesFile) => {
             commit('SET_PRODUCT_IMAGES', imagesFile)
         },
-        /* UPDATE_IMAGE: ({}) {
-
-        }, */
+        PASS_UPDATE_CURRENT_IMAGE: ({commit}, file) => {
+            commit('SET_NEW_CURRENT_IMAGE', file)
+        },
         PASS_CURRENT_IMAGE: ({commit}, {file, index}) => {
             if (index !== null) commit('SET_CURRENT_IMAGE_INDEX', index)
             commit('SET_CURRENT_IMAGE', file)
+        },
+        PASS_REMOVE_CURRENT_IMAGE: ({commit}, index) => {
+            commit('REMOVE_CURRENT_IMAGE', index)
         }
     }
 })

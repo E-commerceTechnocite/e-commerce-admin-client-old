@@ -60,7 +60,7 @@ export default {
     },
     setup(){
         const store = useStore()
-        const files = computed(() => store.getters['dashboard/GET_IMAGES'])
+        const files = ref(store.getters['dashboard/GET_IMAGES'])
         const description=ref('')
         const url=ref('')
         const isVisible=ref(false)
