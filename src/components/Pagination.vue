@@ -26,19 +26,23 @@ export default ({
         const store = useStore()
         let currentPage = ref(props.currentPage)
         const totalPages = props.totalPages
+        const maxButtons = 5
 
         const paginatedData = computed(() => {
           let range = []
-          let startPage = currentPage.value - 2
-          let endPage = currentPage.value + 2
-          for (let i = startPage; i <= endPage; i++) { 
-            if(i < 1) endPage++
-            if(startPage > totalPages - 4) {
-              startPage = totalPages - 4
-              i = startPage
-              endPage = totalPages 
-            }  
-            if(i >= 1 && i <= totalPages) range.push(i)
+          let startPagination = currentPage.value - parseInt(maxButtons/2) + ((maxButtons + 1) % 2)
+          let endPagination = currentPage.value + parseInt(maxButtons/2)
+          if(endPagination > totalPages) {
+            startPagination = totalPages - (maxButtons - 1)
+            endPagination = totalPages
+          }
+          if(startPagination < 1) {
+            startPagination = 1
+            if(totalPages > maxButtons) endPagination = maxButtons
+            else endPagination = totalPages
+          }
+          for (let i = startPagination; i <= endPagination; i++) { 
+            range.push(i)
           }
           return range
         })
@@ -112,7 +116,7 @@ export default ({
     background:#6D97EA;
     color:#ffffff;
 }
-.pagination .iconButton:active > .fas {
+.pagination button:active > .fas {
     color:#ffffff;
 }
 .pagination-item button.active {
@@ -122,7 +126,6 @@ export default ({
 .arrowButtons button.active {
     background-color: transparent;
     font-size:0;
-    border-radius: 4px;
     border: none ;
     margin:5px;
     height: 25px;
