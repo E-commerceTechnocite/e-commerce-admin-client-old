@@ -1,6 +1,6 @@
 <template>
 <div class="product-information">
-    <div class="productListing" v-for="product in data.slice(0,limit)" :key="product">
+    <div class="productListing" v-for="product in data.slice(0,productListLimit)" :key="product">
         <div class="titleProduct item" >{{ product.title }}</div>
         <div class="ref item">{{ product.reference }}</div>
         <div class="category item">{{ product.category.label }}</div>
@@ -17,19 +17,15 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default ({
-    props: ['limit'],
+    props: ['productListLimit'],
     setup(props) {
         const store = useStore()
         store.dispatch('products/FETCH_PRODUCTS') 
         const data = computed(() => store.getters['products/PRODUCTS_'])
-        const meta = computed(() => store.getters['products/META_'])
-        
-        const limit = props.limit
-        /* console.log("meta " + meta.limit)
-        if(limit === null) limit = meta.limit */
+        const productListLimit = props.productListLimit
         return {
             data,
-            limit,
+            productListLimit,
         }  
     }
 })

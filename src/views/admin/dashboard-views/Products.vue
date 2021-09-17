@@ -7,7 +7,7 @@
           <input type="text" placeholder="search">
       </div>
     </div>
-      <ProductInformation />
+      <ProductInformation :productListLimit="productListLimit"/>
     <div> 
       <Pagination :totalPages="meta.maxPages" :currentPage="meta.currentPage"/>
     </div>
@@ -32,10 +32,12 @@ export default {
         const store = useStore()
         store.dispatch('products/FETCH_PRODUCTS')
         const meta = computed(() => store.getters['products/META_'])
+        const productListLimit = 10
         onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
         return {
             store,
-            meta       
+            meta,
+            productListLimit       
         }
     }
 }

@@ -6,7 +6,7 @@
             <h4>Last products added</h4>
             <router-link :to="{name: 'AddProduct'}" class="action">PRODUCT+</router-link>
         </div>
-        <ProductInformation :limit="limit" />
+        <ProductInformation :productListLimit="productListLimit"/>
     </div>
 </template>
 
@@ -26,9 +26,9 @@ export default {
     setup() {
         const store = useStore()
         onMounted(async () => await store.dispatch('auth/AUTH_CHECK_USER_VALIDITY') )
-        const limit = 3
+        const productListLimit = 3
         return {
-            limit,
+            productListLimit,
             store 
         }
     }
