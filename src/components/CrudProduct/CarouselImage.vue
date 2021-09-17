@@ -5,6 +5,7 @@
                 <i class="fas fa-times" @click.self="deleteImage(index)"></i>
                 <div class="img-container">
                     <img class="carousel__item" @click="handleClickImage(image, index)" :src="image.blob" :alt="image.name" :title="image.name">
+                    <!-- <input type="image" :src="image.blob" class="carousel__item" @click="handleClickImage(image, index)"> -->
                 </div>
             </slide>
             <template #addons="{ slidesCount }">
@@ -41,7 +42,9 @@ export default {
         store.dispatch('dashboard/PASS_CURRENT_IMAGE', {file, index})
         showImage.value = true
     }
-    
+    watch(files, (newVal, oldVal) => {
+        console.log(newVal)
+    })
     const closeModal = () => {
         showImage.value = false
     }

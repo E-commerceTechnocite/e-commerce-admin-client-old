@@ -39,8 +39,8 @@
             </div>
 
             <div class="description-product"> 
-                <h4>Description</h4>
-                <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                <quill-editor class="quill" theme="snow" toolbar="full" contentType="html" v-model:content="description"></quill-editor>
+
             </div>
     </div>
     <div>
@@ -54,14 +54,11 @@
 
 
 <script>
-import { computed, ref} from 'vue'
+import { ref, watch, watchEffect} from 'vue'
 import DragAndDrop from '../../../components/CrudProduct/DragAndDrop.vue'
 import CarouselImage from '../../../components/CrudProduct/CarouselImage.vue'
-
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import UploadAdapter from '../../../plugins/UploadAdapter' 
-
 import { useStore } from 'vuex'
+
 export default {
     components: {
         DragAndDrop,
@@ -80,72 +77,29 @@ export default {
             tax:'',
             price:'',
             
+        })/* 
+        watch(description, (newVal, oldVal) => {
+            console.log(newVal)
+        }) */
+        watch(description, (newVal, oldVal) => {
+            console.log(newVal)
         })
-        
+        /* watchEffect(() => {
+            console.log(store.getters['dashboard/GET_IMAGES'])
+
+        }) */
+        /* const showForm = () => {
+            console.log(formValues.value)
+        } */
         
         return {
             formValues,
             isVisible,
             url,
-            description
+            description,
+            // showForm
         }
         
-    },
-    
-    data() {
-       return {
-            editor: ClassicEditor,
-            editorData: '<p></p>',
-            editorConfig: {
-                //   extraPlugins: [this.uploader],
-               //The configuration of the editor.
-                 toolbar: {
-                 },
-
-                 
-                // ['bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList'  ]
-                 
-                 /* {   
-                    items: [
-                        'heading', '|',
-                        'fontfamily', 'fontsize', '|',
-                        'alignment', '|',
-                        'fontColor', 'fontBackgroundColor', '|',
-                        'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
-                        'link', '|',
-                        'outdent', 'indent', '|',
-                        'bulletedList', 'numberedList', 'todoList', '|',
-                        'code', 'codeBlock', '|',
-                        'insertTable', '|',
-                        'uploadImage', 'blockQuote', '|',
-                        'undo', 'redo'
-                    ],
-                        shouldNotGroupWhenFull: true
-                }   */
-            },
-        }
-    }, 
-
-    
-
-    
-
-      // this to test if i get info about product
-    methods :{
-
-        uploader(editor)
-            {
-                 editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-                     return new UploadAdapter( loader );
-                 };
-            },
-        showForm ()  {
-            console.log(this.formValues.title); 
-            console.log(this.formValues.reference);
-            console.log(this.formValues.category); 
-            console.log(this.formValues.tax);
-            console.log(this.formValues.price);
-        }
     }
 }
         
@@ -158,7 +112,6 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     min-height: 800px;
-    /* align-items: flex-start; */
     max-width: 1200px;
     margin: 30px 60px 200px 0;
     border-radius: 5px;
@@ -202,7 +155,6 @@ export default {
     flex: 1;
     max-width: 650px;
     margin-left: 30px;
-    /* background: aqua; */
 }
 .add-product .image-product .carousel {
     margin-top: 30px;
@@ -214,32 +166,37 @@ export default {
     flex-direction: row;
     margin:20px;
     justify-content:  space-around;
-    
-    
 }
 .add-product .image-product .images img{
     border-radius: 8px;
 }
-
-.add-product .description-product {
-    width: 100%;
-    height: 600px;
-    flex: 2 2 auto;
-    margin-top: 30px;
-    background: aquamarine;
-}
-
 .add-product .image-product .image-download{
     flex: 1;
     height: 200px;
     background: #FFFFFF;  
     margin: 20px 20px 20px 20px;
 }
-
 .add-product .image-product .images{
     flex: 1;
     height: 300px;
-    /* background: rgb(0, 255, 85); */
     margin: 20px 0 20px 20px;
 }
+.add-product .ql-toolbar.ql-snow{
+    border: 1px solid #D6D6D6
+}
+.add-product .description-product {
+    width: 100%;
+    height: 600px;
+    flex: 2 2 auto;
+    margin-top: 30px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+}
+.add-product .ql-tooltip {
+    display: none;
+}
+.add-product .ql-formats button {}
 </style>
