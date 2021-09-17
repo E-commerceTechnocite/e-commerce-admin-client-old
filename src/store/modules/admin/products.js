@@ -21,7 +21,7 @@ export default ({
         }
     },
     actions: {
-        FETCH_PRODUCTS: async({commit}, id=1) => {
+        FETCH_PRODUCTS: async({commit}, id = 1) => {
             if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') return 
             let sessionToken = JSON.parse(sessionStorage.getItem('token'))
             try {
@@ -29,9 +29,6 @@ export default ({
                 headers: {'Authorization': `Bearer ${sessionToken}`}
             }) 
             const jsonData = await response.json()
-            console.log("prodprod" + jsonData.data)
-            console.log(jsonData.meta)
-            //console.log("tosseomiel")
             if (jsonData !== null) {
               commit('PRODUCTS_SET', {data: jsonData.data})
               commit('META_SET', {data: jsonData.meta})
@@ -39,15 +36,6 @@ export default ({
             } catch (err) {
                 return err
             }
-            /*try {
-                let response = await fetch ('http://localhost:4000/meta', {
-                headers: {"Content-Type": "application/json"}
-            }) 
-            const jsonData = await response.json()
-            if (jsonData !== null) commit('META_SET', {data: jsonData})
-            } catch (err) {
-                return err
-            }*/
         }
     }
   })

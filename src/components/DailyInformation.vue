@@ -76,7 +76,7 @@ export default ({
     margin: 0px 15px 0px 15px;
     padding: 15px;
     height: 60px;
-    max-width: 375px;
+    max-width: 390px;
     flex-grow: 1;
     display: flex;
     flex-direction: row;

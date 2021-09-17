@@ -1,13 +1,17 @@
 <template>
     <div class="pagination">
       <div class="container">
-        <button class="iconButton" @click="onClickFirstPage()" v-if="currentPage!=1"><i class="fas fa-chevron-double-left"></i></button>
-        <button class="iconButton" @click="onClickPreviousPage()" v-if="currentPage!=1"><i class="fas fa-chevron-left"></i></button>
+        <div class="arrowButtons"> 
+          <button :class="{ active: isFirstPage() }" @click="onClickFirstPage()" id="leftBtn" ><i class="fas fa-chevron-double-left"></i></button> 
+          <button :class="{ active: isFirstPage() }" @click="onClickPreviousPage()" ><i class="fas fa-chevron-left"></i></button>
+        </div>
         <div class="pagination-item" v-for="page in paginatedData" :key="page">  
           <button :class="{ active: isPageActive(page) }" @click="onClickPage(page)">{{ page }}</button>  
         </div> 
-        <button class="iconButton" @click="onClickNextPage()" v-if="currentPage!=numberOfPages"><i class="fas fa-chevron-right"></i></button>
-        <button class="iconButton" @click="onClickLastPage()" v-if="currentPage!=numberOfPages"><i class="fas fa-chevron-double-right"></i></button>
+        <div class="arrowButtons">
+          <button :class="{ active: isLastPage() }" @click="onClickNextPage()"><i class="fas fa-chevron-right"></i></button>
+          <button :class="{ active: isLastPage() }" @click="onClickLastPage()"><i class="fas fa-chevron-double-right"></i></button>
+        </div>
       </div>
     </div>
 </template>
@@ -21,7 +25,7 @@ export default ({
     setup(props) {
         const store = useStore()
         let currentPage = ref(props.currentPage)
-        const numberOfPages = props.totalPages
+        const totalPages = props.totalPages
 
         const paginatedData = computed(() => {
           let range = []
@@ -29,12 +33,12 @@ export default ({
           let endPage = currentPage.value + 2
           for (let i = startPage; i <= endPage; i++) { 
             if(i < 1) endPage++
-            if(startPage > numberOfPages - 4) {
-              startPage = numberOfPages - 4
+            if(startPage > totalPages - 4) {
+              startPage = totalPages - 4
               i = startPage
-              endPage = numberOfPages 
+              endPage = totalPages 
             }  
-            if(i >= 1 && i <= numberOfPages) range.push(i)
+            if(i >= 1 && i <= totalPages) range.push(i)
           }
           return range
         })
@@ -44,7 +48,7 @@ export default ({
           onPageChanged(page)  
         }
         const onClickNextPage = () => {
-          if(currentPage.value < numberOfPages) currentPage.value++
+          if(currentPage.value < totalPages) currentPage.value++
           onPageChanged(currentPage.value)
         }
         const onClickPreviousPage = () => {
@@ -56,18 +60,24 @@ export default ({
           onPageChanged(currentPage.value)
         }
         const onClickLastPage = () => {
-          currentPage.value = numberOfPages
+          currentPage.value = totalPages
           onPageChanged(currentPage.value)
         }
         const isPageActive = (page) => {
           return currentPage.value === page
         }
         const onPageChanged = (page) => {
-          store.dispatch('products/FETCH_PRODUCTS',page)
+          store.dispatch('products/FETCH_PRODUCTS', page)
+        }
+        const isFirstPage = () => {
+          return currentPage.value === 1
+        }
+        const isLastPage = () => {
+          return currentPage.value === totalPages
         }
         return {
           currentPage,
-          numberOfPages,
+          totalPages,
           paginatedData,
           onClickPage,
           onClickNextPage,
@@ -75,6 +85,8 @@ export default ({
           onClickFirstPage,
           onClickLastPage,
           isPageActive, 
+          isFirstPage,
+          isLastPage
         }
     },
 })
@@ -103,21 +115,22 @@ export default ({
 .pagination .iconButton:active > .fas {
     color:#ffffff;
 }
-.pagination .button:active {
+.pagination-item button.active {
     background: #6D97EA;
     color:#ffffff;
 }
-.pagination button.active {
-    background: #6D97EA;
-    color:#ffffff;
-}
-/*.pagination .iconButton {
-    background-color: #ffffff;
+.arrowButtons button.active {
+    background-color: transparent;
+    font-size:0;
     border-radius: 4px;
-    border: 2px, solid black ;
+    border: none ;
     margin:5px;
     height: 25px;
     width: 25px;
+}
+/*.pagination .button:active {
+    background: #6D97EA;
+    color:#ffffff;
 }*/
 /*.pagination .button:hover {
     background: #6D97EA;
