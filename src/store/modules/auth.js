@@ -9,7 +9,7 @@ export default ({
     },
     getters: {
         AUTH_USER_TOKEN: (state) => {
-            return state.user.accessToken
+            return state.user.access_token
         },
 
         AUTH_USER: (state) => {
@@ -42,10 +42,12 @@ export default ({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email.email, password: email.password})
             } 
-            try { /*  */ /* "http://localhost:3000/v1/o-auth/login" */
-                let response = await fetch("http://localhost:4000/login", requestOptions) 
+            try {
+                let response = await fetch("http://localhost:3000/v1/o-auth/login", requestOptions) 
                 if (!response.ok) router.push({name: 'LoginAdmin'})
+                //console.log(response)
                 const data = await response.json()
+                //console.log(data)
                 if (data !== null) commit('AUTH_SET_USER', {userData: data})
             } catch (err) {
                 return err
@@ -57,7 +59,7 @@ export default ({
             if (!sessionStorage.getItem('token') || sessionStorage.getItem('token') === 'undefined') return 
             let sessionToken = JSON.parse(sessionStorage.getItem('token')) 
             try {
-                let response = await fetch ('http://localhost:4000/660/users', {
+                let response = await fetch ('http://localhost:3000/v1/product?limit=1&page=1', {
                 headers: {'Authorization': `Bearer ${sessionToken}`}
             })
             !response.ok ? commit('AUTH_DESTROY') : commit('AUTH_AUTHENTICATION')

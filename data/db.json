@@ -19,15 +19,221 @@
       ]
     }
   ],
+  
+  "products": [
+    {
+      "titleProduct": "Ordinateur",
+      "refr": "ref1",
+      "category": "cat1",
+      "price": "150€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Smartphone",
+      "refr": "ref2",
+      "category": "cat2",
+      "price": "100€",
+      "taxPrice": "6%"
+    },
+    {
+      "titleProduct": "Stylet",
+      "refr": "ref3",
+      "category": "cat3",
+      "price": "10€",
+      "taxPrice": "12%"
+    },
+    {
+      "titleProduct": "Clavier",
+      "refr": "ref4",
+      "category": "cat4",
+      "price": "25€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "TV",
+      "refr": "ref5",
+      "category": "cat",
+      "price": "750€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Smartphone",
+      "refr": "ref2",
+      "category": "cat2",
+      "price": "100€",
+      "taxPrice": "6%"
+    },
+    {
+      "titleProduct": "Stylet",
+      "refr": "ref3",
+      "category": "cat3",
+      "price": "10€",
+      "taxPrice": "12%"
+    },
+    {
+      "titleProduct": "Clavier",
+      "refr": "ref4",
+      "category": "cat4",
+      "price": "25€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Ordinateur",
+      "refr": "ref1",
+      "category": "cat1",
+      "price": "150€",
+      "taxPrice": "21%"
+    },
+    {
+      "titleProduct": "Smartphone",
+      "refr": "ref2",
+      "category": "cat2",
+      "price": "100€",
+      "taxPrice": "6%"
+    },
+    {
+      "titleProduct": "Stylet",
+      "refr": "ref3",
+      "category": "cat3",
+      "price": "10€",
+      "taxPrice": "12%"
+    },
+    {
+      "titleProduct": "Clavier",
+      "refr": "ref4",
+      "category": "cat4",
+      "price": "25€",
+      "taxPrice": "21%"
+    }
+  ],
 
-     
-     "products": [
-        {"id":1, "title" : "laptop" ,"reference" :"product01", "description":"laptop serie oneyes" ,"price":599},
-        {"id":2, "title" : "TVp" ,"reference" :"product02", "description":"Samsung tv " ,"price":800},
-        {"id":3, "title" : "Desk" ,"reference" :"product03", "description":"Desk " ,"price":1500},
-        {"id":4, "title" : "GSM" ,"reference" :"product03", "description":"Gsm 5e generation" ,"price":900}
-    ]
+  "dailyInformations": [
+    {
+      "sales": "126000",
+      "profit": "42000",
+      "users": "1263",
+      "newUsers": "37"
+    }
+  ],
 
-     
+  "data": [
+      {
+        "id": "031f95e5-f60e-4194-9bf4-db99fac69e7f",
+        "title": "Shirt",
+        "reference": "s2itd1miy0",
+        "description": "Music back-end Principal mobile Somalia override Forward Bridge Team-oriented installation Paraguay up Guarani integrate Kansas info-mediaries Balanced capability Account Associate mobile infrastructure mindshare digital Electronics Colorado Chicken protocol real-time Games Paradigm deposit Awesome Iceland Assimilated Arab invoice Lanka methodologies withdrawal reboot Grocery copy payment encryption bypassing networks Home Human azure",
+        "price": 36,
+        "category": {
+          "id": "d0acc279-a9c4-4dcb-b05e-3aa05f82b9e2",
+          "label": "Licensed"
+        }
+      },
+      {
+        "id": "1ce739ca-c263-4b7b-9291-278f3434d125",
+        "title": "Chair",
+        "reference": "fk56a7lc8f",
+        "description": "black Dollar Well Frozen Marketing synthesizing hacking neural-net Swaziland Terrace Factors index Shoes Shirt Unbranded Bedfordshire Intranet override teal Russian orange area Extended Dollar THX payment navigating Right-sized Account Sleek Ergonomic green Versatile Handcrafted Computer Tasty PCI EXE Canada Texas Dollar District hack Quality Orchestrator Wooden azure Concrete Buckinghamshire radical",
+        "price": 91,
+        "category": {
+          "id": "62ef81ca-e6b5-42ee-891c-c64850127e44",
+          "label": "Gorgeous"
+        }
+      },
+      {
+        "id": "20c07c40-d18b-4b16-9c83-68034a622947",
+        "title": "Table",
+        "reference": "qvkmj0xiub",
+        "description": "Response Kiribati solutions Salad Alabama Guyana Automotive Corporate Keyboard Fish Chicken vortals back-end Paradigm Granite service-desk Assurance Georgia port Jewelery Cotton Burkina driver Egypt enable Solutions Tools ubiquitous redundant invoice 1080p XML Steel Computer cross-platform Dynamic card Principal Networked Generic Sausages applications Cambridgeshire Developer Sausages Rica Forward Chair initiatives embrace",
+        "price": 30,
+        "category": {
+          "id": "19df0535-6b5a-4ab8-82e3-12da9fc7473e",
+          "label": "Ergonomic"
+        }
+      },
+      {
+        "id": "22f75864-dd29-4974-be63-84f745abb544",
+        "title": "Table",
+        "reference": "f4k0dl9vh4",
+        "description": "Fantastic Plains Buckinghamshire Soft Money input Springs Director matrix array Investor payment Shoes process Tuna Soft Bedfordshire pixel methodologies copy Response deposit Hryvnia parse Sterling Principal generation Right-sized Jordan invoice Tasty Kwacha Coordinator invoice Hat Lempira utilisation Account Fresh full-range cross-platform Cambridgeshire composite deposit Optimization orange maroon withdrawal back Money",
+        "price": 36,
+        "category": {
+          "id": "d0acc279-a9c4-4dcb-b05e-3aa05f82b9e2",
+          "label": "Licensed"
+        }
+      },
+      {
+        "id": "2300bb29-1f90-4d09-83b3-4ff998c0c9ba",
+        "title": "Shirt",
+        "reference": "fo3duukqnp",
+        "description": "green Quality Salad Unbranded Intelligent PCI International bypassing Rubber Ergonomic Team-oriented success alarm Dobra synergize challenge District Plastic Facilitator Central partnerships impactful Washington Savings Buckinghamshire invoice Station Virginia Singapore communities asymmetric transparent Lane indexing world-class e-services Rustic Account Archipelago) stable French haptic Group Jewelery Small multi-byte Games tan Switchable Auto",
+        "price": 79,
+        "category": {
+          "id": "62ef81ca-e6b5-42ee-891c-c64850127e44",
+          "label": "Gorgeous"
+        }
+      },
+      {
+        "id": "2d6794e0-589e-4522-b945-11aaa152f046",
+        "title": "Computer",
+        "reference": "inlws83ea4",
+        "description": "HDD Loan deposit bricks-and-clicks 6th North backing Buckinghamshire discrete transmitter orchestration Creative card cross-platform Computer Grove functionalities Generic e-tailers Vanuatu Turkmenistan Loan recontextualize Factors XML Garden Vietnam Markets Investor Carolina SMS microchip Cambridgeshire Borders Lebanon Pants Research Associate Montana Assurance one-to-one invoice Account Balanced Heights digital connecting communities Lilangeni Station",
+        "price": 40,
+        "category": {
+          "id": "d0acc279-a9c4-4dcb-b05e-3aa05f82b9e2",
+          "label": "Licensed"
+        }
+      },
+      {
+        "id": "435e91bc-1677-4270-a6a9-a33df25d3b9c",
+        "title": "Keyboard",
+        "reference": "aj2beyamha",
+        "description": "grey withdrawal withdrawal innovative Innovative withdrawal Card Uruguay Practical Pants superstructure override transmitting Legacy Integration interface Money reintermediate transmitting Lithuania Bike Ergonomic Frozen Chicken Outdoors Berkshire port Hollow Well Nevada Kwanza Chicken FTP Dollar Account International Creative override Cape UAE plug-and-play Buckinghamshire service-desk Account bluetooth red Shilling monitor azure SQL",
+        "price": 23,
+        "category": {
+          "id": "9b1fed90-cf40-42f6-b895-c01b3bda01e4",
+          "label": "Licensed"
+        }
+      },
+      {
+        "id": "43b601a1-435b-4109-b393-554d290f0aee",
+        "title": "Soap",
+        "reference": "k5nywy0b7q",
+        "description": "Skyway Metrics ADP payment Fish Bedfordshire e-services Incredible capability Assistant 1080p Chair Account Assurance Central killer Awesome granular Handcrafted out-of-the-box synthesizing Rubber Ports index feed online seize Sleek synergy actuating payment Car Fantastic Dong purple ability systemic Rubber Luxembourg back-end encryption bypass access Kids Money Computer feed withdrawal Field withdrawal",
+        "price": 33,
+        "category": {
+          "id": "19df0535-6b5a-4ab8-82e3-12da9fc7473e",
+          "label": "Ergonomic"
+        }
+      },
+      {
+        "id": "45c57278-d09d-4e4b-b9c2-496d3fbbd90d",
+        "title": "Towels",
+        "reference": "stldyrgr5y",
+        "description": "Fresh Gorgeous Avon Towels Multi-lateral Open-architected Analyst SAS online functionalities hack Buckinghamshire Future Outdoors eco-centric mindshare invoice system expedite Tuna El maximize functionalities Future bypassing Soft bypassing Soap bypassing high-level cross-media matrix Architect Reduced motivating synergistic Analyst Solutions intuitive Legacy Dynamic Future Wyoming Awesome Auto Pound Checking IB haptic web-enabled",
+        "price": 50,
+        "category": {
+          "id": "d0acc279-a9c4-4dcb-b05e-3aa05f82b9e2",
+          "label": "Licensed"
+        }
+      },
+      {
+        "id": "49368802-e754-4cf4-b547-ed3abb55119d",
+        "title": "Tuna",
+        "reference": "dc0s8y7vd3",
+        "description": "Pound leading scalable Bermuda relationships Cotton Forward Facilitator client-server salmon Rubber leverage Principal green Keyboard District Movies extensible Pennsylvania mobile compressing Account green Savings Market Cotton programming Arkansas Morocco systemic Bedfordshire intelligence Electronics Branding Small Tuna capacitor back-end Shilling De-engineered sensor deposit intranet Principal Account monitor reboot Health Intelligent Bacon",
+        "price": 2,
+        "category": {
+          "id": "d0acc279-a9c4-4dcb-b05e-3aa05f82b9e2",
+          "label": "Licensed"
+        }
+      }
+    ],
     
+    "meta": {
+      "currentPage": 1,
+      "limit": 10,
+      "nextPage": 2,
+      "prevPage": null,
+      "maxPages": 6
+    }
 }
