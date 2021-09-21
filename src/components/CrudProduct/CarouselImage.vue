@@ -12,7 +12,7 @@
             <navigation v-if="slidesCount > 3" />
             </template>
         </carousel>
-        <ModalImage v-if="showImage" @close="closeModal"/>
+        <!-- <ModalImage v-if="showImage" @close="closeModal"/> -->
         <!-- <button @click="handleClick">test</button> -->
     </div>
 </template>
@@ -43,11 +43,11 @@ export default {
         showImage.value = true
     }
     watch(files, (newVal, oldVal) => {
-        console.log(newVal)
+        /* newVal = newVal.slice(-1)
+        console.log(newVal[0].file) */
+        store.dispatch('dashboard/UPLOAD_CURRENT_FILE', {file: newVal})
     })
-    const closeModal = () => {
-        showImage.value = false
-    }
+    const closeModal = () => showImage.value = false
 
     return {
         files,

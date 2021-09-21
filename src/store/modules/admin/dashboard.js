@@ -64,6 +64,30 @@ export default ({
         PASS_REMOVE_CURRENT_IMAGE: ({commit}, index) => {
             if (typeof index === 'object') index = index.value
             commit('REMOVE_CURRENT_IMAGE', index)
+        },
+        UPLOAD_CURRENT_FILE: async ({state}, {file}) => {
+            const formData = new FormData()
+            for (let i = 0; i < file.length; i++) {
+                console.log(file[i].file)
+                formData.append('files', file[i].file)
+            }
+            let sessionToken = sessionStorage.getItem('token')
+            let requestOptions = {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM1MDA0NWEyLTRlYTEtNDU1YS1hZjg2LWNiNTJkNGFmMmFkZCIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQHRlc3QuY29tIiwicm9sZUlkIjoiZWQ1N2IxNjktNGNjZi00YWQ3LTg0M2MtNjY2NTUxMzJhY2IzIiwiaWF0IjoxNjMyMjA5MDcxLCJleHAiOjE2MzIyMTI2NzF9.11VDFs338ibjbq-hWTbvZsnnF36LSBUyTRfilRzH7GM`
+                },
+                body: formData
+            } 
+            try {/* "http://localhost:3000/v1/o-auth/login" */
+                let response = await fetch("http://localhost:3000/v1/file/upload-bunch", requestOptions) 
+                if (!response.ok) router.push({name: 'LoginAdmin'})
+                console.log(response)
+                const data = await response.json()
+                console.log(data)
+            } catch (err) {
+                return err
+            }
         }
     }
 })

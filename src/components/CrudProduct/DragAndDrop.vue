@@ -114,7 +114,8 @@ export default {
         files, 
         isMultiple, 
         isEdit, 
-        inputFilter}
+        inputFilter
+        }
     },
     
 }

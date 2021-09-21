@@ -34,8 +34,10 @@
             </form>
 
             <div class="image-product"> 
-                <DragAndDrop :multiple="true" :edit="false"/>
-                <CarouselImage/>
+                <!-- <DragAndDrop :multiple="true" :edit="false"/> -->
+                <!-- <CarouselImage/> -->
+                <!-- <button class="action">SELECT FILES</button> -->
+                <MediaLibrary/>
             </div>
 
             <div class="description-product"> 
@@ -57,12 +59,14 @@
 import { ref, watch, watchEffect} from 'vue'
 import DragAndDrop from '../../../components/CrudProduct/DragAndDrop.vue'
 import CarouselImage from '../../../components/CrudProduct/CarouselImage.vue'
+import MediaLibrary from '../../../components/CrudProduct/MediaLibrary.vue'
 import { useStore } from 'vuex'
 
 export default {
     components: {
-        DragAndDrop,
-        CarouselImage
+        MediaLibrary
+        // DragAndDrop,
+        // CarouselImage
     },
     setup(){
         const store = useStore()
@@ -81,9 +85,6 @@ export default {
         watch(description, (newVal, oldVal) => {
             console.log(newVal)
         }) */
-        watch(description, (newVal, oldVal) => {
-            console.log(newVal)
-        })
         /* watchEffect(() => {
             console.log(store.getters['dashboard/GET_IMAGES'])
 
@@ -155,6 +156,14 @@ export default {
     flex: 1;
     max-width: 650px;
     margin-left: 30px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
 }
 .add-product .image-product .carousel {
     margin-top: 30px;
