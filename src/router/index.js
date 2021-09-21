@@ -11,6 +11,7 @@ import Customers from '../views/admin/dashboard-views/Customers.vue'
 import Shipping from '../views/admin/dashboard-views/Shipping.vue'
 import AddProduct from '../views/admin/dashboard-views/AddProduct.vue'
 import store from '../store'
+import UpdateProduct from '../components/CrudProduct/UpdateProduct'
 const routes = [
   {
     path: '/',
@@ -58,6 +59,11 @@ const routes = [
         path: 'shipping',
         name: 'Shipping',
         component: Shipping
+      },
+      {
+        path: 'updateProduct',
+        name: 'UpdateProduct',
+        component: UpdateProduct
       },
     ]
   },

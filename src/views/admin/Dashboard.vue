@@ -13,6 +13,7 @@
                     <Loading />
                 </div>
             </div>
+            
         </div>
     </div>
     <div v-else>
@@ -65,6 +66,8 @@ export default {
 <style scoped>
 .dashboard {
     display: flex;
+    flex-direction: column;
+    /* position: fixed; */
     /* overflow-x: hidden; */
 }
 .dashboard > div {
@@ -94,8 +97,13 @@ export default {
     font-size: 12px;
     margin: 0 10px;
 }
+.dashboard>div {
+    display: flex;
+}
+.dashboard .container {
+    flex-grow: 1;
+}
 .dashboard .container-link {
     margin-right: 60px;
-    background: black;
 }
 </style>
