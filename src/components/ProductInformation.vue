@@ -6,7 +6,9 @@
         <div class="category item">{{ product.category.label }}</div>
         <div class="price item">{{ product.price }}€</div>
         <div class="taxPrice item">TAXE</div>
+        <!-- call update page -->
         <button class="editButton">EDIT</button>
+        <!-- <router-link :to="UpdateProduct" >  <button class="editButton">EDIT</button> </router-link> -->
         <button class="trashButton"><i class="fas fa-trash"></i></button>
     </div>
 </div>
