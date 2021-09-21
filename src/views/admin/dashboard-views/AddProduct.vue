@@ -207,5 +207,4 @@ export default {
 .add-product .ql-tooltip {
     display: none;
 }
-.add-product .ql-formats button {}
 </style>

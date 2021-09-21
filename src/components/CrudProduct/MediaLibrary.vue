@@ -12,8 +12,9 @@
         </div>
         <div class="library-media-images">
             <div class="media-images">
-                <div class="image" v-for="n in 45" :key="n">
-                    <img src="../../assets/logo.png" :alt="n">
+                {{files}}
+                <div class="image" v-for="file, index in files" :key="index">
+                    <img :src="blob(file.uri)" :alt="file.title">
                 </div>
             </div>
             <div class="media-pagination">
@@ -22,7 +23,7 @@
                     <button><i class="fas fa-angle-left"></i></button>
                 </div>
                 <div v-for="n in 3" :key="n">
-                    <button :class="{active: n===1}">{{n}}</button>
+                    <button :class="{active: n===1}" @click="mediaLibrary(n)">{{n}}</button>
                 </div>
                 <div v-if="true">
                     <button><i class="fas fa-angle-right"></i></button>
@@ -35,10 +36,35 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import { useStore } from 'vuex'
+import { onMounted, watch } from '@vue/runtime-core'
+import environments from '../../environments.js'
+
 export default {
     setup() {
-        const file = ref()
-        return {file}
+        const store = useStore()
+        const files = ref(store.getters["images/GET_FILES"])
+        const pagination = ref()
+        const mediaLibrary = async (page) => {
+            !page ? 
+            await store.dispatch( 'images/CALL_MEDIA_LIBRARY', 1 ) : 
+            await store.dispatch( 'images/CALL_MEDIA_LIBRARY', page )
+            console.log(files.value) 
+            console.log('hello')
+        } 
+        /* watch(files, (newVal, oldVal) => {
+            // files.value = newVal
+            console.log('update') 
+        })  */
+        const blob = (uri) => environments.apiUrl + uri
+        onMounted(() => mediaLibrary())
+
+        return {
+            files,
+            pagination,
+            mediaLibrary,
+            blob
+        }
     }
 }
 </script>
